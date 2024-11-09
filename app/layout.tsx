@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
-import { Inter, Noto_Serif, Source_Code_Pro } from "next/font/google";
+import { Inter } from "next/font/google";
 
 import "./globals.css";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 
-export const inter = Inter({
+const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
 });
 
-export const notoSerif = Noto_Serif({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+// const notoSerif = Noto_Serif({
+//   subsets: ["latin"],
+//   weight: ["400", "700"],
+// });
 
-export const sourceCodePro = Source_Code_Pro({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+// const sourceCodePro = Source_Code_Pro({
+//   subsets: ["latin"],
+//   weight: ["400", "700"],
+// });
 
 export const metadata: Metadata = {
   title: "Frontend Mentor | Note-taking web app",
@@ -30,14 +30,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className={inter.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative h-screen bg-neutral-100 font-sans antialiased dark:bg-neutral-950">
+          <div className="relative h-screen bg-neutral-100 antialiased dark:bg-neutral-950">
             {children}
           </div>
         </ThemeProvider>

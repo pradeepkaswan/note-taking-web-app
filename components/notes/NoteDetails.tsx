@@ -1,5 +1,4 @@
 import type { Note } from "@prisma/client";
-import NoteForm from "./NoteForm";
 
 type Props = {
   note: Note;
@@ -16,7 +15,7 @@ export default function NoteDetails({
 }: Props) {
   return (
     <div>
-      <NoteForm note={note} userId={note.createdById} />
+      {/* <NoteForm note={note} userId={note.createdById} /> */}
 
       <h2>{note.title}</h2>
       <div>
