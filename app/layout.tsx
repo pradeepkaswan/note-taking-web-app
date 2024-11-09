@@ -37,7 +37,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="font-sans antialiased">{children}</div>
+          <div className="relative h-screen bg-neutral-100 font-sans antialiased dark:bg-neutral-950">
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>

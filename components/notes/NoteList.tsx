@@ -10,9 +10,7 @@ export default function NoteList({ notes }: Props) {
     <ul>
       {notes.map((note) => (
         <li key={note.id}>
-          <Link href={`/notes/${note.id}`}>
-            <NoteItem />
-          </Link>
+          <Link href={`/notes/${note.id}`}></Link>
         </li>
       ))}
     </ul>
