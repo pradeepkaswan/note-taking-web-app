@@ -1,4 +1,4 @@
-export async function getCurrentUser() {
+export function getUserFromDb(email: string, password: string) {
   return {
     id: "1",
     email: "pradeepkaswan@gmail.com",

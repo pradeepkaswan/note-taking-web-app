@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import prisma from "@/lib/prisma";
 
 import Header from "@/components/Header";
 import MenuBar from "@/components/MenuBar";
@@ -9,19 +8,17 @@ export const metadata: Metadata = {
   title: "Frontend Mentor | Note-taking web app",
 };
 
-export default async function DashboardLayout({
+export default function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const tags = await prisma.tag.findMany();
-
   return (
     <div className="flex">
-      <Sidebar tags={tags} />
+      <Sidebar />
       <div className="w-full">
         <Header />
-        {children}
+        <div className="bg-white dark:bg-neutral-950">{children}</div>
         <MenuBar />
       </div>
     </div>

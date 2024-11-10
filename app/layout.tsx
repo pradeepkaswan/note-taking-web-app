@@ -6,7 +6,7 @@ import { ThemeProvider } from "@/providers/ThemeProvider";
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "700"],
 });
 
 // const notoSerif = Noto_Serif({
@@ -37,7 +37,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative h-screen bg-neutral-100 antialiased dark:bg-neutral-950">
+          <div className="relative min-h-dvh bg-neutral-100 antialiased dark:bg-neutral-700">
             {children}
           </div>
         </ThemeProvider>

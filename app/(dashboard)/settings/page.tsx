@@ -1,16 +1,17 @@
 import { ThemeSelector } from "@/components/ThemeSelector";
 import * as Icons from "@/components/ui/Icons";
 import Link from "next/link";
+import { signOut } from "@/auth";
 
 export default function Settings() {
   return (
-    <div className="flex h-screen bg-white dark:bg-neutral-950">
-      <aside className="min-w-[258px] border-r pl-8 pr-4 pt-5">
+    <div className="flex">
+      <aside className="hidden w-[258px] border-r pl-8 pr-4 pt-5 xl:flex">
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between rounded-md bg-neutral-100 p-2">
             <div className="flex items-center gap-2">
               <Icons.Sun className="size-5 shrink-0" />
-              <span className="text-preset-4 text-neutral-950">
+              <span className="whitespace-nowrap text-preset-4 text-neutral-950">
                 Color Theme
               </span>
             </div>
@@ -28,23 +29,31 @@ export default function Settings() {
           </div>
         </div>
         <hr className="my-2" />
-        <div className="flex items-center gap-2 p-2">
-          <Icons.Logout className="size-5 shrink-0" />
-          <span className="text-preset-4 text-neutral-700">Logout</span>
-        </div>
+
+        <form
+          action={async () => {
+            "use server";
+            await signOut();
+          }}
+        >
+          <button type="submit" className="flex items-center gap-2 p-2">
+            <Icons.Logout className="size-5 shrink-0" />
+            <span className="text-preset-4 text-neutral-700">Logout</span>
+          </button>
+        </form>
       </aside>
 
-      <div className="flex w-full max-w-[528px] flex-col p-8">
+      <div className="flex w-full flex-col px-4 py-6 md:px-8 xl:p-8">
         <Link
-          href=".."
-          className="mb-3 flex items-center gap-2 dark:text-neutral-300 xl:hidden"
+          href="/settings"
+          className="mb-3 flex items-center gap-2 text-neutral-600 dark:text-neutral-300 xl:hidden"
         >
           <Icons.ArrowLeft className="size-5" />
           <span className="text-preset-4">Settings</span>
         </Link>
 
-        <div className="mb-6 flex flex-col gap-1">
-          <p className="text-preset-3 text-neutral-950 dark:text-white">
+        <div className="mb-6 flex flex-col gap-2 xl:gap-1">
+          <p className="text-preset-1 text-neutral-950 dark:text-white xl:text-preset-3">
             Color Theme
           </p>
           <p className="text-preset-5 text-neutral-700 dark:text-neutral-300">

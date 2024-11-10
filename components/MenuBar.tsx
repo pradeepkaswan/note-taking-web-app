@@ -24,10 +24,10 @@ export default function MenuBar() {
           <li key={item.id} className="flex justify-between">
             <Link
               href={item.href}
-              className={`${pathname === item.href ? "bg-blue-100 text-blue-500" : ""} flex w-20 flex-col items-center gap-1 rounded py-1 text-neutral-600`}
+              className={`${pathname === item.href ? "bg-blue-100 text-blue-500" : "text-neutral-600"} flex w-20 flex-col items-center gap-1 rounded py-1`}
             >
               <Icon className="size-6 shrink-0" />
-              <p className="preset-6 hidden md:block">{item.label}</p>
+              <p className="hidden text-preset-6 md:block">{item.label}</p>
             </Link>
             {/* <div className="hidden h-full w-px bg-neutral-800 md:block"></div> */}
           </li>

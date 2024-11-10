@@ -306,6 +306,8 @@ export function Google(props: React.SVGAttributes<SVGSVGElement>) {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
+      width="24"
+      height="25"
       viewBox="0 0 24 25"
       {...props}
     >

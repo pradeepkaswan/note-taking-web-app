@@ -27,7 +27,7 @@ export function ThemeOption({
       className={`${selectedTheme === theme ? "bg-neutral-100 dark:bg-neutral-800" : ""} flex h-[72px] cursor-pointer items-center justify-between rounded-xl border border-neutral-200 p-4 dark:border-neutral-800`}
     >
       <div className="flex gap-4">
-        <div className="flex size-10 items-center justify-center rounded-xl border border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-950">
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-950">
           <div className="size-6">
             <Icon />
           </div>

@@ -26,3 +26,20 @@ export class RouteManager {
     });
   }
 }
+
+export async function saltAndHashPassword(password: string) {
+  // Generate a random salt
+  const salt = Math.random().toString(36).substring(2, 10);
+
+  // Concatenate password and salt, then hash using SHA-256
+  const enc = new TextEncoder().encode(password + salt);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", enc);
+
+  // Convert the hash to a hexadecimal string
+  const hash = Array.from(new Uint8Array(hashBuffer))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+
+  // Return the salt and hash
+  return `${salt}:${hash}`;
+}

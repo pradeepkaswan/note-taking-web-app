@@ -3,20 +3,14 @@
 import Link from "next/link";
 
 import * as Icons from "./ui/Icons";
-import { Tag } from "@/types/note";
 import { usePathname } from "next/navigation";
+import TagList from "./TagList";
 
-type Props = {
-  tags: Tag[];
-};
-
-export default function Sidebar({ tags }: Props) {
+export default function Sidebar() {
   const pathname = usePathname();
 
-  console.log(pathname);
-
   return (
-    <aside className="hidden h-screen min-w-[272px] flex-col gap-4 border-r bg-white px-4 py-3 xl:flex">
+    <aside className="hidden h-dvh min-w-[272px] flex-col gap-4 border-r bg-white px-4 py-3 xl:flex">
       <div className="py-3">
         <Icons.Logo className="shrink-0" />
       </div>
@@ -60,20 +54,7 @@ export default function Sidebar({ tags }: Props) {
 
       <hr />
 
-      {tags.length > 0 && (
-        <>
-          <div className="px-2">
-            <h2 className="text-preset-4 text-neutral-500">Tags</h2>
-          </div>
-          <ul>
-            {tags.map((tag) => (
-              <li key={tag.id}>
-                <Link href={`/tags/${tag.id}}`}>{tag.name}</Link>
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
+      <TagList />
     </aside>
   );
 }
