@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 import * as Icons from "@/components/ui/Icons";
 
-const menuBarItems = [
+const navItems = [
   { id: 1, label: "Home", icon: "Home", href: "/notes" },
   { id: 2, label: "Search", icon: "Search", href: "/notes/search" },
   { id: 3, label: "Archived", icon: "Archive", href: "/notes/archived" },
@@ -13,13 +13,13 @@ const menuBarItems = [
   { id: 5, label: "Settings", icon: "Settings", href: "/settings" },
 ];
 
-export default function MenuBar() {
+export default function AppBottomNav() {
   const pathname = usePathname();
 
   return (
     <>
-      <ul className="absolute bottom-0 left-0 right-0 flex h-14 justify-between border-t bg-white px-6 py-3 dark:border-neutral-800 dark:bg-neutral-950 md:h-[74px] md:px-8 xl:hidden">
-        {menuBarItems.map((item) => {
+      <ul className="absolute bottom-0 left-0 right-0 flex h-14 justify-around border-t bg-white px-6 py-3 dark:border-neutral-800 dark:bg-neutral-950 md:h-[74px] md:px-8 xl:hidden">
+        {navItems.map((item) => {
           const Icon = Icons[item.icon as keyof typeof Icons];
 
           return (

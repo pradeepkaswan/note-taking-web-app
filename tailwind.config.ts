@@ -1,9 +1,8 @@
 import type { Config } from "tailwindcss";
 import defaultTheme from "tailwindcss/defaultTheme";
-import forms from "@tailwindcss/forms";
 
 const config: Config = {
-  darkMode: "class",
+  darkMode: ["class"],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -79,6 +78,6 @@ const config: Config = {
       spacing: {},
     },
   },
-  plugins: [forms],
+  plugins: [],
 };
 export default config;

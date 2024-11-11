@@ -10,9 +10,9 @@ export default async function NotesPage() {
   const notes = await getNotes();
 
   return (
-    <div className="flex h-full justify-between divide-x divide-neutral-200">
+    <div className="flex h-full justify-between divide-x divide-neutral-200 rounded-lg bg-white dark:divide-neutral-800 dark:bg-neutral-950 xl:rounded-none">
       <div className="w-full px-4 py-5 md:px-8 md:py-6 xl:w-[290px] xl:pl-8 xl:pr-4 xl:pt-5">
-        <h1 className="mb-4 text-preset-1 text-neutral-950 xl:hidden">
+        <h1 className="mb-4 text-preset-1 text-neutral-950 dark:text-white xl:hidden">
           All Notes
         </h1>
 
@@ -25,14 +25,14 @@ export default async function NotesPage() {
         {notes && notes.length > 0 ? (
           <NoteList notes={notes} />
         ) : (
-          <p className="rounded-lg border border-neutral-200 bg-neutral-100 p-2 text-preset-5 text-neutral-950">
+          <p className="rounded-lg border border-neutral-200 bg-neutral-100 p-2 text-preset-5 text-neutral-950 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white">
             You don’t have any notes yet. Start a new note to capture your
             thoughts and ideas.
           </p>
         )}
       </div>
 
-      <div className="hidden w-full flex-1 px-6 py-5 xl:flex">
+      <div className="hidden h-full flex-1 px-6 py-5 xl:flex">
         <NoteEditor />
       </div>
 

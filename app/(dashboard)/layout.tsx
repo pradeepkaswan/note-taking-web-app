@@ -1,13 +1,7 @@
-import type { Metadata } from "next";
-
-import MenuBar from "@/components/shared/MenuBar";
-import Sidebar from "@/components/shared/Sidebar";
-import Header from "@/components/shared/Header";
+import AppBottomNav from "@/components/shared/AppBottomNav";
+import AppSidebar from "@/components/shared/AppSidebar";
+import AppHeader from "@/components/shared/AppHeader";
 import { Plus } from "@/components/ui/Icons";
-
-export const metadata: Metadata = {
-  title: "Frontend Mentor | Note-taking web app",
-};
 
 export default function DashboardLayout({
   children,
@@ -15,20 +9,19 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex">
-      <Sidebar />
-      <PlusButton />
-      <div className="w-full">
-        <Header />
-          {children}
-
-        <MenuBar />
+    <div className="relative flex h-screen">
+      <AppSidebar />
+      <div className="flex flex-1 flex-col">
+        <AppHeader />
+        <main className="flex-1">{children}</main>
       </div>
+      <AppBottomNav />
+      <CreateNoteButton />
     </div>
   );
 }
 
-function PlusButton() {
+function CreateNoteButton() {
   return (
     <button className="absolute bottom-[72px] right-4 flex size-12 items-center justify-center rounded-full bg-blue-500 text-white drop-shadow-md xl:hidden">
       <Plus className="size-8" />

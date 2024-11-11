@@ -1,12 +1,14 @@
 import Link from "next/link";
+
 import * as Icons from "@/components/ui/Icons";
 import { signOut } from "@/lib/actions/auth";
 
-export default function SettingsPage() {
+export default function SettingsLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className="bg-white px-4 py-5 dark:bg-neutral-950">
-      <h1 className="mb-4 text-preset-1">Settings</h1>
-      <aside className="min-w-[258px] flex-col xl:flex xl:hidden">
+    <div className="flex">
+      <aside className="hidden min-w-[258px] flex-col border-r bg-white pl-8 pr-4 pt-5 xl:flex">
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between rounded-md bg-neutral-100 p-2">
             <Link href="/settings/theme" className="flex items-center gap-2">
@@ -45,6 +47,7 @@ export default function SettingsPage() {
           </button>
         </form>
       </aside>
+      <div className="flex-1 bg-white">{children}</div>
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Serif, Source_Code_Pro } from "next/font/google";
 
-import "./globals.css";
 import { ToastProvider } from "@/providers/ToastProvider";
+import "./globals.css";
 
 export const inter = Inter({
   subsets: ["latin"],
@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="relative min-h-screen font-sans antialiased">
+      <body className="h-screen bg-neutral-100 font-sans antialiased dark:bg-neutral-800">
         {children}
         <ToastProvider />
       </body>

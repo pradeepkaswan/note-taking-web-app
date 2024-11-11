@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 
 import { db } from "@/lib/db";
+import { getCurrentUser } from "./auth";
 
 interface Note {
   id: number;
@@ -46,11 +47,11 @@ export async function getNotesByTag(tagName: string) {
 }
 
 export async function getArchivedNotes() {
-  // const user = await getCurrentUser()
+  const user = await getCurrentUser();
 
-  // if (!user) {
-  //   throw new Error('Unauthorized')
-  // }
+  if (!user) {
+    throw new Error("Unauthorized");
+  }
 
   const stmt = db.prepare(`
     SELECT 
@@ -64,7 +65,7 @@ export async function getArchivedNotes() {
     ORDER BY n.updated_at DESC
   `);
 
-  // return stmt.all(user.id) as any[]
+  return stmt.all(user.id) as any[];
 }
 
 export async function createNote(data: {
@@ -180,56 +181,50 @@ export async function searchNotes(query: string) {
 }
 
 export async function archiveNote(id: number) {
-  // const user = await getCurrentUser()
+  const user = await getCurrentUser();
 
-  // if (!user) {
-  //   throw new Error('Unauthorized')
-  // }
+  if (!user) {
+    throw new Error("Unauthorized");
+  }
 
   const stmt = db.prepare(`
     UPDATE notes
     SET is_archived = 1
     WHERE id = ? AND user_id = ?`);
 
-  // const result = stmt.run(id, user.id)
+  const result = stmt.run(id, user.id);
 
-  // if (result.changes === 0) {
-  //   throw new Error('Note not found')
-  // }
+  if (result.changes === 0) {
+    throw new Error("Note not found");
+  }
 
   revalidatePath("/notes");
   revalidatePath(`/notes/archived`);
 }
 
 export async function restoreNote(id: number) {
-  // const user = await getCurrentUser()
+  const user = await getCurrentUser();
 
-  // if (!user) {
-  //   throw new Error('Unauthorized')
-  // }
+  if (!user) {
+    throw new Error("Unauthorized");
+  }
 
   const stmt = db.prepare(`
     UPDATE notes
     SET is_archived = 0
     WHERE id = ? AND user_id = ?`);
 
-  // const result = stmt.run(id, user.id)
+  const result = stmt.run(id, user.id);
 
-  // if (result.changes === 0) {
-  //   throw new Error('Note not found')
-  // }
+  if (result.changes === 0) {
+    throw new Error("Note not found");
+  }
 
   revalidatePath("/notes");
   revalidatePath(`/notes/archived`);
 }
 
-// export async function deleteNote(note: Note) {
-//   return prisma.note.delete({
-//     where: {
-//       id: note.id,
-//     },
-//   });
-// }
+// export async function deleteNote(id: number) {}
 
 export async function getTags() {
   const stmt = db.prepare(`

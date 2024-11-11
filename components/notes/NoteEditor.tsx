@@ -34,7 +34,7 @@ export default function NoteEditor({ initialData }: Props) {
 
   return (
     <form
-      className="w-full"
+      className="flex h-full w-full flex-col"
       action={async () => {
         if (initialData?.id) {
           await updateNote(initialData?.id, { title, content, tags });
@@ -43,7 +43,7 @@ export default function NoteEditor({ initialData }: Props) {
         }
       }}
     >
-      <div className="divide-y">
+      <div className="flex-1 divide-y">
         <div className="mb-4">
           <div className="mb-4">
             <input
@@ -120,7 +120,7 @@ export default function NoteEditor({ initialData }: Props) {
 
       <hr className="my-4" />
 
-      <div className="absolute bottom-4">
+      <div>
         <Button type="submit" className="mr-4">
           Save Note
         </Button>

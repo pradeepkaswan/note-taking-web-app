@@ -38,21 +38,7 @@ export function LoginForm() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      // action={async (formData) => {
-      //   "use server";
-      //   try {
-      //     await signIn("credentials", formData);
-      //   } catch (error) {
-      //     if (error instanceof AuthError) {
-      //       return redirect(`/login?error=${error.type}`);
-      //     }
-      //     throw error;
-      //   }
-      // }}
-      className="pt-6 text-left"
-    >
+    <form onSubmit={handleSubmit} className="pt-6 text-left">
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           <Label>Email Address</Label>
@@ -90,12 +76,12 @@ export function LoginForm() {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 transform text-neutral-500"
+              className="absolute right-3 top-1/2 z-10 -translate-y-1/2 transform text-neutral-500"
             >
               {showPassword ? (
                 <Icons.HidePassword className="size-5 text-black" />
               ) : (
-                <Icons.ShowPassword className="size-5" />
+                <Icons.ShowPassword className="size-5 text-neutral-500" />
               )}
             </button>
             <Input

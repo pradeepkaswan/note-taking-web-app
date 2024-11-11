@@ -34,12 +34,12 @@ export default function SearchBar() {
 
   return (
     <div className="relative flex text-neutral-500">
-      <Search className="absolute left-4 top-3 mr-2 flex size-5" />
+      <Search className="absolute left-4 top-3 z-10 mr-2 flex size-5" />
 
       <Input
         type="search"
         placeholder="Search by title, content, or tags..."
-        className="min-w-[315px] px-[44px] text-preset-5"
+        className="min-w-[300px] pl-[44px] pr-4 text-preset-5"
         onChange={(e) => handleSearch(e.target.value)}
         defaultValue={searchParams?.get("q") ?? ""}
       />

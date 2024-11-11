@@ -1,18 +1,14 @@
 "use client";
 
-import { Theme, useTheme } from "@/hooks/useTheme";
-
 import { Button } from "@/components/ui/Button";
 import * as Icons from "@/components/ui/Icons";
-import { useFont } from "@/hooks/useFont";
 
 export function ThemeSelector() {
-  const { theme, updateTheme } = useTheme();
-  const { font, updateFont } = useFont();
+  const theme: Theme = "light";
 
   return (
     <div className="flex flex-col gap-4">
-      <div>
+      <div className="flex flex-col gap-4">
         <div
           className={`${theme === "light" ? "bg-neutral-100 dark:bg-neutral-800" : ""} flex h-[72px] cursor-pointer items-center justify-between rounded-xl border border-neutral-200 p-4 dark:border-neutral-800`}
         >
