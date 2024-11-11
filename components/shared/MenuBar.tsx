@@ -18,7 +18,7 @@ export default function MenuBar() {
 
   return (
     <>
-      <ul className="absolute bottom-0 left-0 right-0 flex h-14 justify-between divide-neutral-800 border-t bg-white px-6 py-3 dark:border-neutral-800 dark:bg-neutral-950 md:h-[74px] md:divide-x md:px-8 xl:hidden">
+      <ul className="absolute bottom-0 left-0 right-0 flex h-14 justify-between border-t bg-white px-6 py-3 dark:border-neutral-800 dark:bg-neutral-950 md:h-[74px] md:px-8 xl:hidden">
         {menuBarItems.map((item) => {
           const Icon = Icons[item.icon as keyof typeof Icons];
 

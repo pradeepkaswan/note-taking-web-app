@@ -32,7 +32,7 @@ export default async function NotesPage() {
         )}
       </div>
 
-      <div className="hidden flex-1 px-6 py-5 xl:flex">
+      <div className="hidden w-full flex-1 px-6 py-5 xl:flex">
         <NoteEditor />
       </div>
 

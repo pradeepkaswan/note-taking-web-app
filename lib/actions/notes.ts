@@ -230,3 +230,14 @@ export async function restoreNote(id: number) {
 //     },
 //   });
 // }
+
+export async function getTags() {
+  const stmt = db.prepare(`
+    SELECT 
+      t.name
+    FROM tags t
+    ORDER BY t.name ASC
+  `);
+
+  return stmt.all() as string[];
+}

@@ -1,21 +1,10 @@
 import Link from "next/link";
-import data from "@/data.json";
-
 import { Tag } from "./ui/Icons";
 
-
-function getUniqueTags(data: { notes: { tags: string[] }[] }) {
-  const uniqueTags: string[] = [...new Set(data.notes.flatMap(note => note.tags))]
-
-  return uniqueTags
-}
-
-export default function TagList() {
-  const tags = getUniqueTags(data)
-
+export default function TagList({ tags }: { tags: string[] }) {
   return (
     <>
-      {tags.length > 0 && (
+      {tags && tags.length > 0 && (
         <>
           <div className="mb-4 xl:mb-2 xl:px-2">
             <h2 className="text-preset-1 text-neutral-950 xl:text-preset-4 xl:text-neutral-500">

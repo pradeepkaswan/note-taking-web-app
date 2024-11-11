@@ -34,6 +34,7 @@ export default function NoteEditor({ initialData }: Props) {
 
   return (
     <form
+      className="w-full"
       action={async () => {
         if (initialData?.id) {
           await updateNote(initialData?.id, { title, content, tags });
@@ -47,7 +48,7 @@ export default function NoteEditor({ initialData }: Props) {
           <div className="mb-4">
             <input
               type="text"
-              className="border-none p-0 text-preset-1"
+              className="w-full border-none p-0 text-preset-1"
               value={title || "Untitled Note"}
               onChange={(e) => setTitle(e.target.value)}
               required
@@ -62,17 +63,18 @@ export default function NoteEditor({ initialData }: Props) {
               <Tag className="size-4" />
               <span className="text-preset-5">Tags</span>
             </label>
-            {tags.map((tag) => (
-              <span key={tag}>
-                {tag}
-                <button
-                  type="button"
-                  onClick={() => setTags(tags.filter((t) => t != tag))}
+
+            <div className="flex gap-2">
+              {tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="flex items-center gap-2 rounded bg-neutral-200 px-[6px] py-0.5 text-preset-6"
                 >
-                  x
-                </button>
-              </span>
-            ))}
+                  {tag}
+                </span>
+              ))}
+            </div>
+
             <input
               type="text"
               value={tagInput}
@@ -110,14 +112,15 @@ export default function NoteEditor({ initialData }: Props) {
             value={content}
             onChange={(e) => setContent(e.target.value)}
             required
-            className="border-none"
+            className="w-full border-none text-preset-5 text-neutral-700"
+            placeholder="Start typing your note here…"
           />
         </div>
       </div>
 
       <hr className="my-4" />
 
-      <div>
+      <div className="absolute bottom-4">
         <Button type="submit" className="mr-4">
           Save Note
         </Button>
