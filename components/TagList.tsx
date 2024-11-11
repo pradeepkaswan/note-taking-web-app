@@ -1,15 +1,17 @@
 import Link from "next/link";
+import data from "@/data.json";
 
 import { Tag } from "./ui/Icons";
 
-export default function TagList() {
-  // const tags = await prisma.tag.findMany();
 
-  const tags = [
-    { id: "1", name: "Design" },
-    { id: "2", name: "Development" },
-    { id: "3", name: "Marketing" },
-  ];
+function getUniqueTags(data: { notes: { tags: string[] }[] }) {
+  const uniqueTags: string[] = [...new Set(data.notes.flatMap(note => note.tags))]
+
+  return uniqueTags
+}
+
+export default function TagList() {
+  const tags = getUniqueTags(data)
 
   return (
     <>
@@ -21,18 +23,15 @@ export default function TagList() {
             </h2>
           </div>
 
-          <ul className="flex flex-col gap-1">
+          <ul className="flex flex-col gap-1 divide-y">
             {tags.map((tag) => (
-              <li
-                key={tag.id}
-                className="border-spacing-1 border-b py-[10px] text-neutral-700 xl:border-none xl:px-3"
-              >
+              <li key={tag} className="py-[10px] text-neutral-700 xl:px-3">
                 <Link
-                  href={`/tags/${tag.id}}`}
+                  href={`/tags/${tag}}`}
                   className="flex items-center gap-2"
                 >
                   <Tag className="size-5" />
-                  <span className="text-preset-4">{tag.name}</span>
+                  <span className="text-preset-4">{tag}</span>
                 </Link>
               </li>
             ))}

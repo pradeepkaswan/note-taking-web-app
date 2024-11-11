@@ -1,6 +1,27 @@
 import { Button } from "@/components/ui/Button";
+import { forgotPassword } from "@/lib/actions/auth";
+// import { useState } from "react";
 
-export default function ForgotPassword() {
+export default function ForgotPasswordPage() {
+  // const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle')
+  // const [error, setError] = useState('')
+
+  // async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  //   e.preventDefault()
+  //   setStatus('loading')
+  //   setError('')
+
+  //   const formData = new FormData(e.currentTarget)
+
+  //   try {
+  //     await forgotPassword(formData.get('email') as string)
+  //     setStatus('success')
+  //   } catch (error: any) {
+  //     setError(error.message)
+  //     setStatus('idle')
+  //   }
+  // }
+
   return (
     <>
       <h1 className="mb-2 mt-4 text-preset-1">Forgotten your password?</h1>
@@ -14,8 +35,8 @@ export default function ForgotPassword() {
             Email Address
           </label>
           <input
-            type="password"
-            name="password"
+            type="email"
+            name="email"
             placeholder="email@example.com"
             required
           />

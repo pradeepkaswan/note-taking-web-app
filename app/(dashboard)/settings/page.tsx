@@ -1,12 +1,13 @@
-import { ThemeSelector } from "@/components/ThemeSelector";
-import * as Icons from "@/components/ui/Icons";
 import Link from "next/link";
-import { signOut } from "@/auth";
+
+import { ThemeSelector } from "@/components/settings/ThemeSelector";
+import * as Icons from "@/components/ui/Icons";
+import { signOut } from "@/lib/actions/auth";
 
 export default function Settings() {
   return (
     <div className="flex">
-      <aside className="hidden w-[258px] border-r pl-8 pr-4 pt-5 xl:flex">
+      <aside className="hidden min-w-[258px] flex-col border-r pl-8 pr-4 pt-5 xl:flex">
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between rounded-md bg-neutral-100 p-2">
             <div className="flex items-center gap-2">
@@ -43,7 +44,7 @@ export default function Settings() {
         </form>
       </aside>
 
-      <div className="flex w-full flex-col px-4 py-6 md:px-8 xl:p-8">
+      <div className="w-full flex-1 flex-col px-4 py-6 md:px-8 xl:p-8">
         <Link
           href="/settings"
           className="mb-3 flex items-center gap-2 text-neutral-600 dark:text-neutral-300 xl:hidden"

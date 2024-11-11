@@ -1,15 +1,9 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { AuthError } from "next-auth";
 
-import { signIn } from "@/auth";
-import { Button } from "@/components/ui/Button";
 import GoogleButton from "@/components/GoogleButton";
-import { Input, PasswordInput } from "@/components/ui/Input";
-import { Label } from "@/components/ui/Label";
-import { Info } from "@/components/ui/Icons";
+import { LoginForm } from "@/components/auth/LoginForm";
 
-export default async function Login() {
+export default async function LoginPage() {
   return (
     <>
       <h1 className="mb-2 mt-4 text-preset-1 text-neutral-950 dark:text-white">
@@ -19,45 +13,7 @@ export default async function Login() {
         Please log in to continue
       </p>
 
-      <form
-        action={async (formData) => {
-          "use server";
-          try {
-            await signIn("credentials", formData);
-          } catch (error) {
-            if (error instanceof AuthError) {
-              return redirect(`/login?error=${error.type}`);
-            }
-            throw error;
-          }
-        }}
-        className="pt-6 text-left"
-      >
-        <fieldset className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <Label>Email Address</Label>
-            <Input type="email" name="email" placeholder="email@example.com" />
-            <span className="flex items-center gap-2 text-preset-6 text-neutral-600">
-              <Info className="size-4" />
-              <span>This is a hint text to help user.</span>
-            </span>
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center justify-between">
-              <Label>Password</Label>
-              <span className="cursor-pointer text-preset-6 text-neutral-600 underline underline-offset-[2.5px] hover:text-blue-500">
-                Forgot
-              </span>
-            </div>
-            <PasswordInput name="password" />
-          </div>
-
-          <Button type="submit" className="w-full">
-            Login
-          </Button>
-        </fieldset>
-      </form>
+      <LoginForm />
 
       <hr className="mt-4 border-neutral-200 dark:border-neutral-800" />
 

@@ -1,65 +1,103 @@
-// "use client";
+"use client";
 
-// import * as React from "react";
-// import * as ToastPrimitive from "@radix-ui/react-toast";
-// import { cva, type VariantProps } from "class-variance-authority";
-// import * as Icons from "./Icons";
+import Link from "next/link";
 
-// import { cn } from "@/lib/utils";
+import { toast as sonnerToast } from "sonner";
+import * as Icons from "@/components/ui/Icons";
 
-// const ToastProvider = ToastPrimitive.Provider;
+interface ToastProps {
+  message: string;
+  link?: {
+    text: string;
+    href: string;
+  };
+}
 
-// const ToastViewport = React.forwardRef<
-//   React.ElementRef<typeof ToastPrimitive.Viewport>,
-//   React.ComponentPropsWithoutRef<typeof ToastPrimitive.Viewport>
-// >(({ className, ...props }, ref) => (
-//   <ToastPrimitive.Viewport
-//     ref={ref}
-//     className={cn(
-//       "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse space-y-2 p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]",
-//       className,
-//     )}
-//     {...props}
-//   />
-// ));
-// ToastViewport.displayName = ToastPrimitive.Viewport.displayName;
+export const toast = {
+  saveNote: () => {
+    Toast.success({
+      message: "Note saved successfully",
+    });
+  },
 
-// const toastVariants = cva("group pointer-events-auto", {
-//   variants: {
-//     variant: {
-//       default: "",
-//       destructive: "",
-//     },
-//   },
-//   defaultVariants: {
-//     variant: "default",
-//   },
-// });
+  archiveNote: () => {
+    Toast.success({
+      message: "Note archived.",
+      link: {
+        text: "Archived Notes",
+        href: "/notes/archived",
+      },
+    });
+  },
 
-// const Toast = React.forwardRef<
-//   React.ElementRef<typeof ToastPrimitive.Root>,
-//   React.ComponentPropsWithoutRef<typeof ToastPrimitive.Root> &
-//     VariantProps<typeof toastVariants>
-// >(({ className, variant, ...props }, ref) => (
-//   <ToastPrimitive.Root
-//     ref={ref}
-//     className={cn(toastVariants({ variant }), className)}
-//     {...props}
-//   />
-// ));
-// Toast.displayName = ToastPrimitive.Root.displayName;
+  deleteNote: () => {
+    Toast.success({
+      message: "Note permanently deleted.",
+    });
+  },
 
-// const ToastAction = React.forwardRef<
-//   React.ElementRef<typeof ToastPrimitive.Action>,
-//   React.ComponentPropsWithoutRef<typeof ToastPrimitive.Action>
-// >(({ className, ...props }, ref) => (
-//   <ToastPrimitive.Action
-//     ref={ref}
-//     className={cn(
-//       "ring-offset-backgroud inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium text-blue-600 transition-colors hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50",
-//       className,
-//     )}
-//     {...props}
-//   />
-// ));
-// ToastAction.displayName = ToastPrimitive.Action.displayName;
+  restoreNote: () => {
+    Toast.success({
+      message: "Note restored to active notes.",
+      link: {
+        text: "All Notes",
+        href: "/notes",
+      },
+    });
+  },
+
+  updateSettings: () => {
+    Toast.success({
+      message: "Settings updated successfully!",
+    });
+  },
+
+  changePassword: () => {
+    Toast.success({
+      message: "Password changed successfully!",
+    });
+  },
+
+  addTag: () => {
+    Toast.success({
+      message: "Tag added successfully!",
+    });
+  },
+
+  removeTag: () => {
+    Toast.success({
+      message: "Tag removed successfully!",
+    });
+  },
+};
+
+const Toast = {
+  success: ({ message, link }: ToastProps) => {
+    sonnerToast.custom(() => (
+      <div className="flex min-w-[274px] items-center justify-between rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
+        <div className="flex items-center space-x-2">
+          <div className="flex-shrink-0">
+            <Icons.Checkmark className="size-4 text-green-500" />
+          </div>
+          <div className="flex-1">
+            <p className="text-preset-6 text-neutral-950">{message}</p>
+          </div>
+        </div>
+
+        <div className="flex items-center space-x-2">
+          {link && (
+            <Link
+              href={link.href}
+              className="text-preset-6 text-neutral-950 underline underline-offset-2"
+            >
+              {link.text}
+            </Link>
+          )}
+          <button className="flex-shrink-0 text-neutral-400">
+            <Icons.Cross className="size-4" />
+          </button>
+        </div>
+      </div>
+    ));
+  },
+};

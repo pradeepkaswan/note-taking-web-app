@@ -1,7 +1,3 @@
-export default async function Note() {
-  return (
-    <>
-      <h1>Note</h1>
-    </>
-  );
+export default function NotePage() {
+  return <div></div>;
 }

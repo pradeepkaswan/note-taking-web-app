@@ -1,10 +1,9 @@
 import Link from "next/link";
 
 import GoogleButton from "@/components/GoogleButton";
-import { Button } from "@/components/ui/Button";
-import { signIn } from "@/auth";
+import { SignUpForm } from "@/components/auth/SignUpForm";
 
-export default function Signup() {
+export default function SignupPage() {
   return (
     <>
       <h1 className="mb-2 mt-4 text-preset-1">Create your Account</h1>
@@ -12,41 +11,7 @@ export default function Signup() {
         Sign up to start organizing your notes and boost your productivity.
       </p>
 
-      <form
-        action={async (formData) => {
-          "use server";
-          await signIn("credentials", formData);
-        }}
-        className="pt-6 text-left"
-      >
-        <fieldset className="flex flex-col gap-4">
-          <div className="flex flex-col gap-[6px]">
-            <label htmlFor="email" className="text-preset-4 text-neutral-950">
-              Email Address
-            </label>
-            <input
-              type="email"
-              name="email"
-              placeholder="email@example.com"
-              required
-            />
-          </div>
-
-          <div className="flex flex-col gap-[6px]">
-            <label
-              htmlFor="password"
-              className="text-preset-4 text-neutral-950"
-            >
-              Password
-            </label>
-            <input type="password" name="password" required />
-          </div>
-
-          <Button type="submit" className="w-full">
-            Sign up
-          </Button>
-        </fieldset>
-      </form>
+      <SignUpForm />
 
       <hr className="mt-4" />
 

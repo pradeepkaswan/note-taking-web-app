@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/Button";
 
-export default function ResetPassword() {
+export default function ResetPasswordPage() {
   return (
     <>
       <h1 className="mb-2 mt-4 text-preset-1">Reset Your Password</h1>
