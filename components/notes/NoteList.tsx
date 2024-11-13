@@ -1,17 +1,14 @@
 import Link from "next/link";
-import NoteCard from "./NoteCard";
 
-export default function NoteList({
-  notes,
-}: {
-  notes: {
-    id: number;
-    title: string;
-    lastEdited: number;
-    tags: string;
-  }[];
-}) {
-  const tags = ["React"];
+import NoteCard from "./NoteCard";
+import { Note, Tag } from "@/app/lib/definitions";
+
+type Props = {
+  notes: Note[];
+};
+
+export default function NoteList({ notes }: Props) {
+  const tags: Tag[] = [];
 
   return (
     <ul className="flex flex-col gap-1 divide-y divide-neutral-200 pb-32">

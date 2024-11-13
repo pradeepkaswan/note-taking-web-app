@@ -13,7 +13,7 @@ const initialState = {
 };
 
 export function SignUpForm() {
-  const [state, action] = useActionState(signupAction, initialState);
+  const [state, action, isPending] = useActionState(signupAction, initialState);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   return (
@@ -69,8 +69,12 @@ export function SignUpForm() {
           )}
         </div>
 
-        <Button type="submit" className="w-full">
-          Sign up
+        <Button type="submit" disabled={isPending} className="w-full">
+          {isPending ? (
+            <Icons.Status className="size-4 text-neutral-300" />
+          ) : (
+            <span>Sign up</span>
+          )}
         </Button>
       </div>
     </form>

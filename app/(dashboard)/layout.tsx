@@ -2,25 +2,20 @@ import BottomNav from "@/components/shared/bottom-nav";
 import SideNav from "@/components/shared/side-nav";
 import Header from "@/components/shared/header";
 import { Plus } from "@/components/ui/Icons";
-import { redirect } from "next/navigation";
-import { getCurrentSession } from "../lib/server/session";
+import { Suspense } from "react";
 
 export default async function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { session } = await getCurrentSession();
-
-  if (session === null) {
-    redirect("/login");
-  }
-
   return (
     <div className="relative flex h-screen">
       <SideNav />
       <div className="flex flex-1 flex-col">
-        <Header />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Header />
+        </Suspense>
         <main className="flex-1 overflow-y-auto">{children}</main>
       </div>
       <BottomNav />

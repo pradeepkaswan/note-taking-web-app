@@ -68,7 +68,7 @@ export async function loginAction(
   const session = await createSession(sessionToken, user.id);
   setSessionTokenCookie(sessionToken, session.expiresAt);
 
-  return redirect("/notes");
+  return redirect("/");
 }
 
 export async function signupAction(
@@ -120,5 +120,37 @@ export async function logoutAction(): Promise<ActionResult> {
 
   invalidateSession(session.id);
   deleteSessionTokenCookie();
+  return redirect("/login");
+}
+
+export async function forgotPasswordAction(
+  _prev: ActionResult,
+  formData: FormData,
+): Promise<ActionResult> {
+  const email = formData.get("email");
+
+  if (typeof email !== "string") {
+    return { error: "Invalid or missing fields" };
+  }
+
+  if (!verifyEmailInput(email)) {
+    return { error: "Please enter a valid email address." };
+  }
+
+  const user = getUserFromEmail(email);
+
+  if (user === null) {
+    return { error: "Account does not exist" };
+  }
+
+  // invalidateUserPasswordResetSessions(user.id);
+
+  // const sessionToken = generateSessionToken();
+  // const session = createPasswordResetSession(sessionToken, session.expiresAt);
+
+  // sendPasswordResetEmail(session.email, session.code);
+  // setPasswordResetSessionTokenCookie(sessionToken, session.expiresAt);
+  // return redirect("/reset-password/verify-email");
+
   return redirect("/login");
 }

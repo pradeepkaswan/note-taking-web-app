@@ -1,9 +1,8 @@
+import { Note, Tag } from "@/app/lib/definitions";
+
 type Props = {
-  note: {
-    title: string;
-    lastEdited: number;
-  } & { tags: string };
-  tags: string[];
+  note: Note;
+  tags: Tag[];
 };
 
 export default function NoteCard({ note, tags }: Props) {
@@ -14,16 +13,16 @@ export default function NoteCard({ note, tags }: Props) {
       <ul className="flex gap-1">
         {tags.map((tag) => (
           <li
-            key={tag}
+            key={tag.id}
             className="flex items-center gap-2 rounded bg-neutral-200 px-[6px] py-0.5"
           >
-            <span className="text-preset-6">{tag}</span>
+            <span className="text-preset-6">{tag.name}</span>
           </li>
         ))}
       </ul>
 
       <p className="text-preset-6 text-neutral-700">
-        {new Date(note.lastEdited).toLocaleDateString()}
+        {new Date(note.updatedAt).toLocaleDateString()}
       </p>
     </div>
   );

@@ -1,29 +1,24 @@
 import Link from "next/link";
 
+import { redirect } from "next/navigation";
+
 import NoteList from "@/components/notes/NoteList";
 import { Button } from "@/components/ui/Button";
 import { Archive, Delete } from "@/components/ui/Icons";
-// import { getNotes } from "@/app/lib/actions/notes";
 import NoteEditor from "@/components/notes/NoteEditor";
-import { Suspense } from "react";
-
-type Note = {
-  id: number;
-  title: string;
-  lastEdited: number;
-  tags: string;
-};
+// import { getNotes } from "@/app/lib/actions/notes";
+import { getCurrentSession } from "@/app/lib/server/session";
+import { Note } from "@/app/lib/definitions";
 
 export default async function NotesPage() {
+  const { session } = await getCurrentSession();
+
+  if (session === null) {
+    redirect("/login");
+  }
+
   // const notes = await getNotes();
-  const notes: Note[] = [
-    {
-      id: 1,
-      title: "Note 1",
-      lastEdited: 1679147200000,
-      tags: "tag1, tag2, tag3",
-    },
-  ];
+  const notes: Note[] = [];
 
   return (
     <div className="flex h-full justify-between divide-x divide-neutral-200 rounded-lg bg-white dark:divide-neutral-800 dark:bg-neutral-950 xl:rounded-none">
@@ -38,9 +33,7 @@ export default async function NotesPage() {
           </Button>
         </Link>
         {notes && notes.length > 0 ? (
-          <Suspense fallback={<div>Loading...</div>}>
-            <NoteList notes={notes} />
-          </Suspense>
+          <NoteList notes={notes} />
         ) : (
           <p className="rounded-lg border border-neutral-200 bg-neutral-100 p-2 text-preset-5 text-neutral-950 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white">
             You don’t have any notes yet. Start a new note to capture your

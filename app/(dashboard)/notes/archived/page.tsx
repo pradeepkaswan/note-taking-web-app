@@ -1,31 +1,16 @@
 import Link from "next/link";
 
 import NoteList from "@/components/notes/NoteList";
+import { Note } from "@/app/lib/definitions";
+import { Button } from "@/components/ui/Button";
+import { Delete, Restore } from "@/components/ui/Icons";
+
 // import { getArchivedNotes } from "@/lib/actions/notes";
 
-export default async function ArchivedNotes() {
+export default function ArchivedNotes() {
   // const notes = await getArchivedNotes();
 
-  const notes = [
-    {
-      id: 1,
-      title: "React Performance Optimization",
-      tags: "Dev, React",
-      content:
-        "Key performance optimization techniques:\n\n1. Code Splitting\n- Use React.lazy() for route-based splitting\n- Implement dynamic imports for heavy components\n\n2. Memoization\n- useMemo for expensive calculations\n- useCallback for function props\n- React.memo for component optimization\n\n3. Virtual List Implementation\n- Use react-window for long lists\n- Implement infinite scrolling\n\nTODO: Benchmark current application and identify bottlenecks",
-      lastEdited: Date.parse("2024-10-29T10:15:00Z"),
-      isArchived: false,
-    },
-    {
-      id: 2,
-      title: "Japan Travel Planning",
-      tags: "Travel,Personal",
-      content:
-        "Japan Trip Planning - Spring 2025\n\nItinerary Draft:\nWeek 1: Tokyo\n- Shibuya and Harajuku\n- TeamLab Digital Art Museum\n- Day trip to Mount Fuji\n\nWeek 2: Kyoto & Osaka\n- Traditional temples\n- Cherry blossom viewing\n- Food tour in Osaka\n\nBudget: $3000\nAccommodation: Mix of hotels and traditional ryokans\nJR Pass: 14 days\n\nTODO: Book flights 6 months in advance",
-      lastEdited: Date.parse("2024-10-28T16:45:00Z"),
-      isArchived: false,
-    },
-  ];
+  const notes: Note[] = [];
 
   return (
     <div className="flex h-full justify-between divide-x divide-neutral-200 rounded-lg bg-white dark:divide-neutral-800 dark:bg-neutral-950 xl:rounded-none">
@@ -39,7 +24,7 @@ export default async function ArchivedNotes() {
           them anytime.
         </p>
 
-        {notes && notes.length > 0 ? (
+        {notes.length > 0 ? (
           <NoteList notes={notes} />
         ) : (
           <p className="rounded-lg border border-neutral-200 bg-neutral-100 p-2 text-preset-5 text-neutral-950 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white">
@@ -54,6 +39,27 @@ export default async function ArchivedNotes() {
           </p>
         )}
       </div>
+
+      <div className="flex-1"></div>
+
+      {notes.length > 0 && (
+        <div className="hidden w-[258px] flex-col gap-3 px-4 py-5 text-neutral-950 xl:flex">
+          <Button
+            variant="border"
+            className="flex items-center justify-start gap-2"
+          >
+            <Restore className="size-5" />
+            <span className="text-preset-4">Restore Note</span>
+          </Button>
+          <Button
+            variant="border"
+            className="flex items-center justify-start gap-2"
+          >
+            <Delete className="size-5" />
+            <span className="text-preset-4">Delete Note</span>
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

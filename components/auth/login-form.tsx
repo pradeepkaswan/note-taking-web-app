@@ -14,7 +14,7 @@ const initialState = {
 };
 
 export function LoginForm() {
-  const [state, action] = useActionState(loginAction, initialState);
+  const [state, action, isPending] = useActionState(loginAction, initialState);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   return (
@@ -44,7 +44,7 @@ export function LoginForm() {
             <Label htmlFor="form-login.password">Password</Label>
             <Link
               href="/forgot-password"
-              className="cursor-pointer text-preset-6 text-neutral-600 underline underline-offset-[2.5px] hover:text-blue-500"
+              className="cursor-pointer text-preset-6 text-neutral-600 underline underline-offset-4 hover:text-blue-500"
             >
               Forgot
             </Link>
@@ -79,8 +79,12 @@ export function LoginForm() {
           )}
         </div>
 
-        <Button type="submit" className="w-full">
-          Login
+        <Button type="submit" disabled={isPending} className="w-full">
+          {isPending ? (
+            <Icons.Status className="size-4 text-neutral-300" />
+          ) : (
+            <span>Login</span>
+          )}
         </Button>
       </div>
     </form>
