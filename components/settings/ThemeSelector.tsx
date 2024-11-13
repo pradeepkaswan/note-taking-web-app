@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button";
 import * as Icons from "@/components/ui/Icons";
 
 export function ThemeSelector() {
-  const theme: Theme = "light";
+  const theme: "light" | "dark" | "system" = "light";
 
   return (
     <div className="flex flex-col gap-4">
@@ -28,7 +28,7 @@ export function ThemeSelector() {
         </div>
 
         <div
-          className={`${theme === "dark" ? "bg-neutral-100 dark:bg-neutral-800" : ""} flex h-[72px] cursor-pointer items-center justify-between rounded-xl border border-neutral-200 p-4 dark:border-neutral-800`}
+          className={`"bg-neutral-100 dark:bg-neutral-800" : ""} flex h-[72px] cursor-pointer items-center justify-between rounded-xl border border-neutral-200 p-4 dark:border-neutral-800`}
         >
           <div className="flex gap-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-950">
@@ -46,7 +46,7 @@ export function ThemeSelector() {
         </div>
 
         <div
-          className={`${theme === "system" ? "bg-neutral-100 dark:bg-neutral-800" : ""} flex h-[72px] cursor-pointer items-center justify-between rounded-xl border border-neutral-200 p-4 dark:border-neutral-800`}
+          className={`"bg-neutral-100 dark:bg-neutral-800" : ""} flex h-[72px] cursor-pointer items-center justify-between rounded-xl border border-neutral-200 p-4 dark:border-neutral-800`}
         >
           <div className="flex gap-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-950">
@@ -57,7 +57,7 @@ export function ThemeSelector() {
                 System
               </p>
               <p className="text-preset-6 text-neutral-700 dark:text-neutral-300">
-                Adapts to your device's theme
+                Adapts to your device&apos;s theme
               </p>
             </div>
           </div>

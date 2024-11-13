@@ -1,9 +1,16 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import GoogleButton from "@/components/GoogleButton";
-import { SignUpForm } from "@/components/auth/SignUpForm";
+import { SignUpForm } from "@/components/auth/sign-up-form";
+import { getCurrentSession } from "@/app/lib/server/session";
 
-export default function SignupPage() {
+export default async function SignupPage() {
+  const { session } = await getCurrentSession();
+
+  if (session !== null) {
+    return redirect("/notes");
+  }
   return (
     <>
       <h1 className="mb-2 mt-4 text-preset-1">Create your Account</h1>

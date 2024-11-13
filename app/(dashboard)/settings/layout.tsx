@@ -1,13 +1,13 @@
 import Link from "next/link";
 
 import * as Icons from "@/components/ui/Icons";
-import { signOut } from "@/lib/actions/auth";
+import { LogoutButton } from "@/components/auth/logout-button";
 
 export default function SettingsLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className="flex">
+    <div className="flex h-full">
       <aside className="hidden min-w-[258px] flex-col border-r bg-white pl-8 pr-4 pt-5 xl:flex">
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between rounded-md bg-neutral-100 p-2">
@@ -35,17 +35,7 @@ export default function SettingsLayout({
 
         <hr className="my-2" />
 
-        <form
-          action={async () => {
-            "use server";
-            await signOut();
-          }}
-        >
-          <button type="submit" className="flex items-center gap-2 p-2">
-            <Icons.Logout className="size-5 shrink-0" />
-            <span className="text-preset-4 text-neutral-700">Logout</span>
-          </button>
-        </form>
+        <LogoutButton />
       </aside>
       <div className="flex-1 bg-white">{children}</div>
     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { createNote, updateNote } from "@/lib/actions/notes";
+// import { createNote, updateNote } from "@/app/lib/actions/notes";
 import { useState } from "react";
 import { Clock, Tag } from "../ui/Icons";
 import { Button } from "../ui/Button";
@@ -33,16 +33,7 @@ export default function NoteEditor({ initialData }: Props) {
   };
 
   return (
-    <form
-      className="flex h-full w-full flex-col"
-      action={async () => {
-        if (initialData?.id) {
-          await updateNote(initialData?.id, { title, content, tags });
-        } else {
-          await createNote({ title, content, tags });
-        }
-      }}
-    >
+    <form className="flex h-full w-full flex-col">
       <div className="flex-1 divide-y">
         <div className="mb-4">
           <div className="mb-4">

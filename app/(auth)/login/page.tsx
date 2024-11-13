@@ -1,9 +1,17 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import GoogleButton from "@/components/GoogleButton";
-import { LoginForm } from "@/components/auth/LoginForm";
+import { LoginForm } from "@/components/auth/login-form";
+import { getCurrentSession } from "@/app/lib/server/session";
 
 export default async function LoginPage() {
+  const { session } = await getCurrentSession();
+
+  if (session !== null) {
+    return redirect("/notes");
+  }
+
   return (
     <>
       <h1 className="mb-2 mt-4 text-preset-1 text-neutral-950 dark:text-white">

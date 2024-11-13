@@ -13,12 +13,12 @@ const navItems = [
   { id: 5, label: "Settings", icon: "Settings", href: "/settings" },
 ];
 
-export default function AppBottomNav() {
+export default function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <>
-      <ul className="absolute bottom-0 left-0 right-0 flex h-14 justify-around border-t bg-white px-6 py-3 dark:border-neutral-800 dark:bg-neutral-950 md:h-[74px] md:px-8 xl:hidden">
+    <nav className="fixed bottom-0 left-0 right-0 z-10 h-14 border-t bg-white px-6 py-3 dark:border-neutral-800 dark:bg-neutral-950 md:h-[74px] md:px-8 xl:hidden">
+      <ul className="flex justify-around">
         {navItems.map((item) => {
           const Icon = Icons[item.icon as keyof typeof Icons];
 
@@ -35,6 +35,6 @@ export default function AppBottomNav() {
           );
         })}
       </ul>
-    </>
+    </nav>
   );
 }

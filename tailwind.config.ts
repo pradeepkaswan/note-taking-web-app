@@ -11,9 +11,9 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", ...defaultTheme.fontFamily.sans],
-        serif: ["Noto Serif", ...defaultTheme.fontFamily.serif],
-        mono: ["Source Code Pro", ...defaultTheme.fontFamily.mono],
+        sans: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
+        serif: ["var(--font-noto-serif)", ...defaultTheme.fontFamily.serif],
+        mono: ["var(--font-source-code-pro)", ...defaultTheme.fontFamily.mono],
       },
       fontSize: {
         "preset-1": [

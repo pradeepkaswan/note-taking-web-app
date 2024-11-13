@@ -12,7 +12,7 @@ export default function TagList({ tags }: { tags: string[] }) {
             </h2>
           </div>
 
-          <ul className="flex flex-col gap-1 divide-y dark:divide-neutral-800">
+          <ul className="flex flex-col gap-1 divide-y overflow-y-scroll dark:divide-neutral-800 xl:divide-none">
             {tags.map((tag) => (
               <li
                 key={tag}

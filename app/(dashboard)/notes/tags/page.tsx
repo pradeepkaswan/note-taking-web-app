@@ -12,8 +12,14 @@ export default async function TagsPage() {
     "Prisma",
     "PostgreSQL",
     "GraphQL",
-    "SQLite",
     "MySQL",
+    "SQLite",
+    "SQL Server",
+    "MongoDB",
+    "Redis",
+    "Firebase",
+    "Remix",
+    "HTMX",
   ];
 
   return (

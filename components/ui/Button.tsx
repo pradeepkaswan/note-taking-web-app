@@ -2,18 +2,18 @@ import { ButtonHTMLAttributes, forwardRef } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/app/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center h-[41px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-neutral-500  ring-offset-neutral-500 justify-center whitespace-nowrap rounded-lg text-preset-4 transition-colors disabled:pointer-events-none disabled:text-neutral-300 disabled:bg-neutral-100 ",
+  "inline-flex border items-center h-[41px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-neutral-500  ring-offset-neutral-500 justify-center whitespace-nowrap rounded-lg text-preset-4 transition-colors disabled:pointer-events-none disabled:text-neutral-300 disabled:bg-neutral-100 ",
   {
     variants: {
       variant: {
-        primary: "bg-blue-500 text-white hover:bg-blue-700",
+        primary: "bg-blue-500 border-transparent text-white hover:bg-blue-700",
         secondary:
-          "bg-neutral-100 focus-visible:border-neutral-950 text-neutral-600 hover:text-neutral-950 hover:bg-white hover:border border-neutral-300",
+          "bg-neutral-100 focus-visible:border-neutral-950 text-neutral-600 hover:text-neutral-950 hover:bg-transparent border-0 hover:outline hover:outline-neutral-300",
         border:
-          "border border-neutral-300 focus-visible:border-neutral-950 hover:bg-neutral-50 text-neutral-950 dark:border-neutral-600",
+          " border-neutral-300 focus-visible:border-neutral-950 hover:bg-neutral-50 text-neutral-950 dark:border-neutral-600",
         danger:
           "bg-red-500 border border-transparent text-white hover:bg-red-700",
       },

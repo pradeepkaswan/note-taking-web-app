@@ -1,10 +1,10 @@
 import Link from "next/link";
 import * as Icons from "@/components/ui/Icons";
-import { signOut } from "@/lib/actions/auth";
+import { LogoutButton } from "@/components/auth/logout-button";
 
 export default function SettingsPage() {
   return (
-    <div className="bg-white px-4 py-5 dark:bg-neutral-950">
+    <div className="h-full bg-white px-4 py-5 dark:bg-neutral-950">
       <h1 className="mb-4 text-preset-1">Settings</h1>
       <aside className="min-w-[258px] flex-col xl:flex xl:hidden">
         <div className="flex flex-col gap-2">
@@ -33,17 +33,7 @@ export default function SettingsPage() {
 
         <hr className="my-2" />
 
-        <form
-          action={async () => {
-            "use server";
-            await signOut();
-          }}
-        >
-          <button type="submit" className="flex items-center gap-2 p-2">
-            <Icons.Logout className="size-5 shrink-0" />
-            <span className="text-preset-4 text-neutral-700">Logout</span>
-          </button>
-        </form>
+        <LogoutButton />
       </aside>
     </div>
   );
