@@ -9,7 +9,7 @@ import { Info } from "../ui/Icons";
 import { forgotPasswordAction } from "@/app/(auth)/actions";
 
 const initialForgotPasswordState = {
-  error: "",
+  error: {},
 };
 
 export function ForgotPasswordForm() {
@@ -31,10 +31,10 @@ export function ForgotPasswordForm() {
           required
         />
       </div>
-      {state.error && (
+      {state.error?.email && (
         <span className="flex text-red-500">
           <Info className="-mt-[1px] mr-2 size-4" />
-          <p className="text-preset-6">{state.error}</p>
+          <p className="text-preset-6">{state.error.email}</p>
         </span>
       )}
 

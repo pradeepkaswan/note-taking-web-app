@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/Label";
 import { signupAction } from "@/app/(auth)/actions";
 
 const initialState = {
-  error: "",
+  error: {},
 };
 
 export function SignUpForm() {
@@ -27,13 +27,13 @@ export function SignUpForm() {
             name="email"
             autoComplete="username"
             placeholder="email@example.com"
-            className={`${state.error && "border-red-500"}`}
+            className={`${state.error?.email && "border-red-500"}`}
             required
           />
-          {state.error && (
+          {state.error?.email && (
             <span className="flex text-red-500">
               <Icons.Info className="-mt-[1px] mr-2 size-4" />
-              <p className="text-preset-6">{state.error}</p>
+              <p className="text-preset-6">{state.error.email}</p>
             </span>
           )}
         </div>
@@ -58,13 +58,13 @@ export function SignUpForm() {
               name="password"
               autoComplete="current-password"
               required
-              className={`${state.error && "border-red-500"}`}
+              className={`${state.error?.password && "border-red-500"}`}
             />
           </div>
-          {state.error && (
+          {state.error?.password && (
             <span className="flex text-red-500">
               <Icons.Info className="-mt-[1px] mr-2 size-4" />
-              <p className="text-preset-6">{state.error}</p>
+              <p className="text-preset-6">{state.error.password}</p>
             </span>
           )}
         </div>

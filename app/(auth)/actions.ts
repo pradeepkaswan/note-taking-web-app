@@ -18,18 +18,15 @@ import {
   verifyPasswordhash,
   verifyPasswordStrength,
 } from "@/app/lib/server/password";
-import {
-  createUser,
-  getUserFromEmail,
-  getUserPasswordHash,
-} from "@/app/lib/server/user";
+import { createUser, getUserFromEmail } from "@/app/lib/server/user";
+import { db } from "../lib/db";
 
 interface ActionResult {
-  error?: string | null;
-  // error: {
-  //   email: string | null;
-  //   password: string | null;
-  // };
+  error?: {
+    email?: string;
+    password?: string;
+    toast?: string;
+  };
 }
 
 export async function loginAction(
@@ -40,28 +37,37 @@ export async function loginAction(
   const password = formData.get("password");
 
   if (typeof email !== "string" || typeof password !== "string") {
-    return { error: "Invalid or missing fields" };
+    return { error: { email: "Invalid email", password: "Invalid password" } };
   }
 
-  if (email === "" || password === "") {
-    return { error: "Please enter your email and password." };
+  if (email === "") {
+    return { error: { email: "Please enter your email." } };
+  }
+
+  if (password === "") {
+    return { error: { password: "Pleae enter your password." } };
   }
 
   if (!verifyEmailInput(email)) {
-    return { error: "Please enter a valid email address." };
+    return { error: { email: "Please enter a valid email address." } };
   }
 
-  const user = await getUserFromEmail(email);
+  const user = await db.query.usersTable.findFirst({
+    where: (users, { eq }) => eq(users.email, email),
+  });
 
-  if (user === null) {
-    return { error: "Account does not exist" };
+  if (!user) {
+    return { error: { toast: "Account does not exist" } };
   }
 
-  const passwordHash = await getUserPasswordHash(user.id);
-  const validPassword = await verifyPasswordhash(passwordHash, password);
+  if (!user.hashedPassword) {
+    return {};
+  }
+
+  const validPassword = await verifyPasswordhash(user.hashedPassword, password);
 
   if (!validPassword) {
-    return { error: "Invalid password" };
+    return { error: { password: "Invalid password" } };
   }
 
   const sessionToken = generateSessionToken();
@@ -79,27 +85,31 @@ export async function signupAction(
   const password = formData.get("password");
 
   if (typeof email !== "string" || typeof password !== "string") {
-    return { error: "Invalid or missing fields" };
+    return { error: { email: "Invalid email", password: "Invalid password" } };
   }
 
-  if (email === "" || password === "") {
-    return { error: "Please enter your email and password." };
+  if (email === "") {
+    return { error: { email: "Please enter your email." } };
+  }
+
+  if (password === "") {
+    return { error: { password: "Pleae enter your password." } };
   }
 
   if (!verifyEmailInput(email)) {
-    return { error: "Please enter a valid email address." };
+    return { error: { email: "Please enter a valid email address." } };
   }
 
   const emailAvailable = checkEmailAvailability(email);
 
   if (!emailAvailable) {
-    return { error: "Email already exists" };
+    return { error: { email: "Email already exists" } };
   }
 
   const strongPassword = await verifyPasswordStrength(password);
 
   if (!strongPassword) {
-    return { error: "Password is too weak" };
+    return { error: { password: "Password is too weak" } };
   }
 
   const user = await createUser(email, password);
@@ -108,18 +118,17 @@ export async function signupAction(
   const session = await createSession(sessionToken, user.id);
   setSessionTokenCookie(sessionToken, session.expiresAt);
 
-  return redirect("/login");
+  return redirect("/");
 }
 
 export async function logoutAction(): Promise<ActionResult> {
   const { session } = await getCurrentSession();
 
-  if (session === null) {
-    return { error: "Not authenticated, Unauthorized" };
+  if (session) {
+    invalidateSession(session.id);
+    deleteSessionTokenCookie();
   }
 
-  invalidateSession(session.id);
-  deleteSessionTokenCookie();
   return redirect("/login");
 }
 
@@ -130,17 +139,17 @@ export async function forgotPasswordAction(
   const email = formData.get("email");
 
   if (typeof email !== "string") {
-    return { error: "Invalid or missing fields" };
+    return { error: { email: "Invalid or missing fields" } };
   }
 
   if (!verifyEmailInput(email)) {
-    return { error: "Please enter a valid email address." };
+    return { error: { email: "Please enter a valid email address." } };
   }
 
   const user = getUserFromEmail(email);
 
   if (user === null) {
-    return { error: "Account does not exist" };
+    return { error: { toast: "Account does not exist" } };
   }
 
   // invalidateUserPasswordResetSessions(user.id);

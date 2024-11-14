@@ -8,11 +8,13 @@ import { sha256 } from "@oslojs/crypto/sha2";
 import type { User } from "./user";
 import { sql } from "@vercel/postgres";
 import { cookies } from "next/headers";
+import { db } from "../db";
+import { sessionsTable } from "../db/schema";
 
 export interface Session {
   id: string;
+  userId: string;
   expiresAt: Date;
-  userId: number;
 }
 
 type SessionValidationResult =
@@ -29,17 +31,23 @@ export async function validateSessionToken(
 
   const { rows } = await sql<{
     id: string;
-    user_id: number;
+    user_id: string;
     expires_at: number;
-    user_id_1: number;
+    user_id_1: string;
+    google_id: string;
     email: string;
+    name: string;
+    picture: string;
   }>`
     SELECT 
       sessions.id, 
       sessions.user_id, 
       sessions.expires_at, 
       users.id AS user_id_1,
-      users.email
+      users.google_id,
+      users.email,
+      users.name,
+      users.picture
     FROM sessions
     INNER JOIN users ON sessions.user_id = users.id
     WHERE sessions.id = ${sessionId}
@@ -59,7 +67,10 @@ export async function validateSessionToken(
 
   const user: User = {
     id: row.user_id_1,
+    googleId: row.google_id,
     email: row.email,
+    name: row.name,
+    picture: row.picture,
   };
 
   const now = Date.now();
@@ -125,17 +136,23 @@ export function generateSessionToken(): string {
 
 export async function createSession(
   token: string,
-  userId: number,
+  userId: string,
 ): Promise<Session> {
   const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
+  const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30); // 30 days
 
-  const session: Session = {
-    id: sessionId,
-    userId,
-    expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
-  };
-
-  await sql`INSERT INTO sessions (id, user_id, expires_at) VALUES (${session.id}, ${session.userId}, ${Math.floor(session.expiresAt.getTime() / 1000)})`;
+  const [session] = await db
+    .insert(sessionsTable)
+    .values({
+      id: sessionId,
+      userId,
+      expiresAt,
+    })
+    .returning({
+      id: sessionsTable.id,
+      userId: sessionsTable.userId,
+      expiresAt: sessionsTable.expiresAt,
+    });
 
   return session;
 }

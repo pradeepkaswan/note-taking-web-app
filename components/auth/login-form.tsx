@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import Link from "next/link";
 
 import { Input } from "@/components/ui/Input";
@@ -8,14 +8,21 @@ import { Label } from "@/components/ui/Label";
 import * as Icons from "@/components/ui/Icons";
 import { Button } from "@/components/ui/Button";
 import { loginAction } from "@/app/(auth)/actions";
+import { toast } from "../ui/Toast";
 
 const initialState = {
-  error: "",
+  error: {},
 };
 
 export function LoginForm() {
   const [state, action, isPending] = useActionState(loginAction, initialState);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (state?.error?.toast) {
+      toast.accountDoesNotExist();
+    }
+  }, [state?.error?.toast]);
 
   return (
     <form action={action} className="pt-6 text-left">
@@ -28,13 +35,13 @@ export function LoginForm() {
             name="email"
             autoComplete="username"
             placeholder="email@example.com"
-            className={`${state.error && "border-red-500"}`}
+            className={`${state.error?.email && "border-red-500"}`}
             required
           />
-          {state.error && (
+          {state.error?.email && (
             <span className="flex text-red-500">
               <Icons.Info className="-mt-[1px] mr-2 size-4" />
-              <p className="text-preset-6">{state.error}</p>
+              <p className="text-preset-6">{state.error.email}</p>
             </span>
           )}
         </div>
@@ -68,13 +75,13 @@ export function LoginForm() {
               name="password"
               autoComplete="current-password"
               required
-              className={`${state.error && "border-red-500"}`}
+              className={`${state.error?.password && "border-red-500"}`}
             />
           </div>
-          {state.error && (
+          {state.error?.password && (
             <span className="flex text-red-500">
               <Icons.Info className="-mt-[1px] mr-2 size-4" />
-              <p className="text-preset-6">{state.error}</p>
+              <p className="text-preset-6">{state.error.password}</p>
             </span>
           )}
         </div>

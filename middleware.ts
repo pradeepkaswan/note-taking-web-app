@@ -2,6 +2,20 @@ import { NextResponse } from "next/server";
 
 import type { NextRequest } from "next/server";
 
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - login, signup, forgot-password, reset-password (auth routes)
+     */
+    "/((?!api|_next/static|_next/image|favicon.ico|login|signup|forgot-password|reset-password).*)",
+  ],
+};
+
 export async function middleware(request: NextRequest): Promise<NextResponse> {
   if (request.method === "GET") {
     const response = NextResponse.next();
@@ -29,7 +43,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
   let origin: URL;
   try {
     origin = new URL(originHeader);
-  } catch (error) {
+  } catch {
     return new NextResponse(null, {
       status: 403,
     });

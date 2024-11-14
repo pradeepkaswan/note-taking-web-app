@@ -6,7 +6,7 @@ import { logoutAction } from "@/app/(auth)/actions";
 import { Logout } from "../ui/Icons";
 
 const initialState = {
-  error: "",
+  error: {},
 };
 
 export function LogoutButton() {

@@ -9,7 +9,7 @@ const navItems = [
   { id: 1, label: "Home", icon: "Home", href: "/notes" },
   { id: 2, label: "Search", icon: "Search", href: "/notes/search" },
   { id: 3, label: "Archived", icon: "Archive", href: "/notes/archived" },
-  { id: 4, label: "Tags", icon: "Tag", href: "/notes/tags" },
+  { id: 4, label: "Tags", icon: "Tag", href: "/tags" },
   { id: 5, label: "Settings", icon: "Settings", href: "/settings" },
 ];
 

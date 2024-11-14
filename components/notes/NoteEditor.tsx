@@ -3,7 +3,6 @@
 // import { createNote, updateNote } from "@/app/lib/actions/notes";
 import { useState } from "react";
 import { Clock, Tag } from "../ui/Icons";
-import { Button } from "../ui/Button";
 
 type Props = {
   initialData?: {
@@ -107,15 +106,6 @@ export default function NoteEditor({ initialData }: Props) {
             placeholder="Start typing your note here…"
           />
         </div>
-      </div>
-
-      <hr className="my-4" />
-
-      <div>
-        <Button type="submit" className="mr-4">
-          Save Note
-        </Button>
-        <Button variant="secondary">Cancel</Button>
       </div>
     </form>
   );

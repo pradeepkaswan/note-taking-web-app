@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import GoogleButton from "@/components/GoogleButton";
+import GoogleOAuthButton from "@/components/google-oauth-button";
 import { LoginForm } from "@/components/auth/login-form";
 import { getCurrentSession } from "@/app/lib/server/session";
 
 export default async function LoginPage() {
-  const { session } = await getCurrentSession();
+  const { session, user } = await getCurrentSession();
 
-  if (session !== null) {
-    return redirect("/notes");
+  if (session !== null || user !== null) {
+    return redirect("/");
   }
 
   return (
@@ -29,7 +29,7 @@ export default async function LoginPage() {
         Or log in with:
       </p>
 
-      <GoogleButton />
+      <GoogleOAuthButton />
 
       <hr className="my-4 border-neutral-200 dark:border-neutral-800" />
 

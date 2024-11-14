@@ -1,7 +1,12 @@
 import { redirect } from "next/navigation";
+import { getCurrentSession } from "./lib/server/session";
 
 export default async function HomePage() {
-  redirect("/notes");
+  const { session, user } = await getCurrentSession();
 
-  return <></>;
+  if (session === null || user === null) {
+    return redirect("/login");
+  }
+
+  redirect("/notes");
 }

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "./ui/Button";
 import { Google } from "./ui/Icons";
 
-export default function GoogleButton() {
+export default function GoogleOAuthButton() {
   return (
     <Link href="/login/google">
       <Button

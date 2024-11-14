@@ -14,6 +14,16 @@ interface ToastProps {
 }
 
 export const toast = {
+  accountDoesNotExist: () => {
+    Toast.success({
+      message: "Account does not exist",
+      link: {
+        text: "Sign up",
+        href: "/signup",
+      },
+    });
+  },
+
   saveNote: () => {
     Toast.success({
       message: "Note saved successfully",

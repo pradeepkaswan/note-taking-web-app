@@ -14,22 +14,17 @@ export default function ResetPasswordPage() {
             <label htmlFor="email" className="text-preset-4 text-neutral-950">
               New Password
             </label>
-            <input
-              type="password"
-              name="password"
-              placeholder="email@example.com"
-              required
-            />
+            <input type="password" name="password" required />
           </div>
 
           <div className="flex flex-col gap-[6px]">
             <label
-              htmlFor="password"
+              htmlFor="confirmPassword"
               className="text-preset-4 text-neutral-950"
             >
               Confirm New Password
             </label>
-            <input type="password" name="password" required />
+            <input name="confirmPassword" type="password" required />
           </div>
 
           <Button type="submit" className="w-full">

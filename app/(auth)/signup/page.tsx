@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import GoogleButton from "@/components/GoogleButton";
+import GoogleOAuthButton from "@/components/google-oauth-button";
 import { SignUpForm } from "@/components/auth/sign-up-form";
 import { getCurrentSession } from "@/app/lib/server/session";
 
@@ -26,7 +26,7 @@ export default async function SignupPage() {
         Or log in with:
       </p>
 
-      <GoogleButton />
+      <GoogleOAuthButton />
 
       <hr className="my-4" />
 
