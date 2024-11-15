@@ -5,12 +5,8 @@ import { logout } from "@/app/(auth)/actions";
 
 import { Logout } from "../ui/Icons";
 
-const initialState = {
-  errors: {},
-};
-
 export function LogoutButton() {
-  const [, action] = useActionState(logout, initialState);
+  const [, action] = useActionState(logout, undefined);
 
   return (
     <form action={action} className="pt-2">

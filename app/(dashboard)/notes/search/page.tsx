@@ -1,12 +1,20 @@
+import { Suspense } from "react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import Search from "@/components/layout/search";
 import { type Note } from "@/app/_lib/db/schema";
 import NoteList from "@/components/notes/NoteList";
-import { Suspense } from "react";
+import { getCurrentSession } from "@/app/_lib/server/session";
 
-export default function SearchPage() {
+export default async function SearchPage() {
   const notes: Note[] = [];
+
+  const { session, user } = await getCurrentSession();
+
+  if (session === null || user === null) {
+    return redirect("/login");
+  }
 
   return (
     <div className="flex h-full flex-col gap-4 rounded-lg bg-white px-4 py-5 dark:bg-neutral-950 md:px-8 md:py-6">

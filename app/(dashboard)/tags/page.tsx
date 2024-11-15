@@ -1,9 +1,16 @@
+import { redirect } from "next/navigation";
+
 import { type Tag } from "@/app/_lib/db/schema";
+import { getCurrentSession } from "@/app/_lib/server/session";
 import TagList from "@/components/tags/TagList";
-// import { getTags } from "@/lib/actions/notes";
 
 export default async function TagsPage() {
-  // const tags = await getTags();
+  const { session, user } = await getCurrentSession();
+
+  if (session === null || user === null) {
+    return redirect("/login");
+  }
+
   const tags: Tag[] = [
     {
       id: "1",

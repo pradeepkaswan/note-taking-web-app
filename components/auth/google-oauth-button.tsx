@@ -1,11 +1,12 @@
-import Link from "next/link";
-
 import { Button } from "@/components/ui/Button";
 import { Google } from "@/components/ui/Icons";
 
 export default function GoogleOAuthButton() {
   return (
-    <Link href="/login/google">
+    <form
+      action={`${process.env.NEXT_PUBLIC_URL}/api/login/google`}
+      method="GET"
+    >
       <Button
         type="submit"
         variant="border"
@@ -16,6 +17,6 @@ export default function GoogleOAuthButton() {
         </div>
         <span className="text-preset-3">Google</span>
       </Button>
-    </Link>
+    </form>
   );
 }

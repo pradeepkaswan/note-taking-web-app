@@ -1,6 +1,14 @@
+import { getCurrentSession } from "@/app/_lib/server/session";
 import { ForgotPasswordForm } from "@/components/auth/forgot-password-form";
+import { redirect } from "next/navigation";
 
-export default function ForgotPasswordPage() {
+export default async function ForgotPasswordPage() {
+  const { session, user } = await getCurrentSession();
+
+  if (session !== null || user !== null) {
+    return redirect("/");
+  }
+
   return (
     <>
       <h1 className="mb-2 mt-4 text-preset-1">Forgotten your password?</h1>

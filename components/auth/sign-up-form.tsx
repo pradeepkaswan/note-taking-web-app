@@ -1,20 +1,25 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/Button";
 import * as Icons from "@/components/ui/Icons";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 import { signup } from "@/app/(auth)/actions";
-
-const initialState = {
-  errors: {},
-};
+import { toast } from "@/components/ui/Toast";
 
 export function SignUpForm() {
-  const [state, action, isPending] = useActionState(signup, initialState);
+  const [state, action, pending] = useActionState(signup, undefined);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (state?.message) {
+      toast.success({
+        message: state.message,
+      });
+    }
+  }, [state?.message]);
 
   return (
     <form action={action} className="pt-6 text-left">
@@ -28,7 +33,6 @@ export function SignUpForm() {
             autoComplete="username"
             placeholder="email@example.com"
             className={`${state?.errors?.email && "border-red-500"}`}
-            required
           />
           {state?.errors?.email && (
             <span className="flex text-red-500">
@@ -57,7 +61,6 @@ export function SignUpForm() {
               id="form-login.password"
               name="password"
               autoComplete="current-password"
-              required
               className={`${state?.errors?.password && "border-red-500"}`}
             />
           </div>
@@ -69,12 +72,8 @@ export function SignUpForm() {
           )}
         </div>
 
-        <Button type="submit" disabled={isPending} className="w-full">
-          {isPending ? (
-            <Icons.Status className="size-4 text-neutral-300" />
-          ) : (
-            <span>Sign up</span>
-          )}
+        <Button type="submit" disabled={pending} className="w-full">
+          {pending ? "..." : "Sign up"}
         </Button>
       </div>
     </form>

@@ -1,4 +1,4 @@
-import { InferSelectModel, relations } from "drizzle-orm";
+import { type InferSelectModel } from "drizzle-orm";
 import {
   pgTable,
   varchar,
@@ -31,19 +31,6 @@ export const sessions = pgTable("sessions", {
   }).notNull(),
 });
 
-export const passwordResetSessions = pgTable("password_reset_sessions", {
-  id: text("id").primaryKey(),
-  userId: uuid("user_id")
-    .notNull()
-    .references(() => users.id),
-  email: varchar({ length: 255 }).notNull(),
-  code: varchar({ length: 255 }).notNull(),
-  expiresAt: timestamp("expires_at", {
-    withTimezone: true,
-    mode: "date",
-  }).notNull(),
-});
-
 export const notes = pgTable("notes", {
   id: uuid("id").defaultRandom().primaryKey(),
   title: text("title").notNull(),
@@ -57,25 +44,10 @@ export const notes = pgTable("notes", {
 
 export const tags = pgTable("tags", {
   id: uuid("id").defaultRandom().primaryKey(),
-  name: varchar({ length: 255 }).notNull(),
+  name: varchar({ length: 255 }).notNull().unique(),
 });
 
 export type User = InferSelectModel<typeof users>;
 export type Session = InferSelectModel<typeof sessions>;
-export type PasswordResetSession = InferSelectModel<
-  typeof passwordResetSessions
->;
 export type Note = InferSelectModel<typeof notes>;
 export type Tag = InferSelectModel<typeof tags>;
-
-export const userRelations = relations(users, ({ many }) => ({
-  sessions: many(sessions),
-  passwordResetSessions: many(passwordResetSessions),
-}));
-
-export const sessionRelations = relations(sessions, ({ one }) => ({
-  user: one(users, {
-    fields: [sessions.userId],
-    references: [users.id],
-  }),
-}));

@@ -13,13 +13,15 @@ export default async function LoginPage() {
   }
 
   return (
-    <>
-      <h1 className="mb-2 mt-4 text-preset-1 text-neutral-950 dark:text-white">
-        Welcome to Note
-      </h1>
-      <p className="mb-4 text-preset-5 text-neutral-600 dark:text-neutral-300">
-        Please log in to continue
-      </p>
+    <div>
+      <div className="mb-4 mt-4 flex flex-col gap-2">
+        <h1 className="text-preset-1 text-neutral-950 dark:text-white">
+          Welcome to Note
+        </h1>
+        <p className="text-preset-5 text-neutral-600 dark:text-neutral-300">
+          Please log in to continue
+        </p>
+      </div>
 
       <LoginForm />
 
@@ -42,6 +44,6 @@ export default async function LoginPage() {
           Sign Up
         </Link>
       </p>
-    </>
+    </div>
   );
 }

@@ -8,21 +8,19 @@ import { Label } from "@/components/ui/Label";
 import * as Icons from "@/components/ui/Icons";
 import { Button } from "@/components/ui/Button";
 import { login } from "@/app/(auth)/actions";
-import { toast } from "../ui/Toast";
-
-const initialState = {
-  errors: {},
-};
+import { toast } from "@/components/ui/Toast";
 
 export function LoginForm() {
-  const [state, action, isPending] = useActionState(login, initialState);
+  const [state, action, isPending] = useActionState(login, undefined);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   useEffect(() => {
-    if (state?.errors?.toast) {
-      toast.accountDoesNotExist();
+    if (state?.message) {
+      toast.success({
+        message: state.message,
+      });
     }
-  }, [state?.errors?.toast]);
+  }, [state?.message]);
 
   return (
     <form action={action} className="pt-6 text-left">
@@ -35,10 +33,9 @@ export function LoginForm() {
             name="email"
             autoComplete="username"
             placeholder="email@example.com"
-            className={`${state.errors?.email && "border-red-500"}`}
-            required
+            className={`${state?.errors?.email && "border-red-500"}`}
           />
-          {state.errors?.email && (
+          {state?.errors?.email && (
             <span className="flex text-red-500">
               <Icons.Info className="-mt-[1px] mr-2 size-4" />
               <p className="text-preset-6">{state.errors.email}</p>
@@ -74,11 +71,10 @@ export function LoginForm() {
               id="form-login.password"
               name="password"
               autoComplete="current-password"
-              required
-              className={`${state.errors?.password && "border-red-500"}`}
+              className={`${state?.errors?.password && "border-red-500"}`}
             />
           </div>
-          {state.errors?.password && (
+          {state?.errors?.password && (
             <span className="flex text-red-500">
               <Icons.Info className="-mt-[1px] mr-2 size-4" />
               <p className="text-preset-6">{state.errors.password}</p>

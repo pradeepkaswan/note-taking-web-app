@@ -1,3 +1,4 @@
+import "server-only";
 import { cache } from "react";
 import {
   encodeBase32LowerCaseNoPadding,
@@ -8,8 +9,9 @@ import { eq } from "drizzle-orm";
 import { cookies } from "next/headers";
 
 import { db } from "../db";
-import { type Session, type User, sessions, users } from "../db/schema";
-import { redirect } from "next/navigation";
+import { sessions, users } from "../db/schema";
+
+import type { User, Session } from "../db/schema";
 
 type SessionValidationResult =
   | {
@@ -28,9 +30,8 @@ export function generateSessionToken(): string {
 export async function createSession(
   token: string,
   userId: string,
-): Promise<void> {
+): Promise<Session> {
   const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
-
   const session: Session = {
     id: sessionId,
     userId,
@@ -38,24 +39,13 @@ export async function createSession(
   };
 
   await db.insert(sessions).values(session);
-
-  const cookieStore = await cookies();
-  cookieStore.set("session", token, {
-    path: "/",
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    expires: session.expiresAt,
-  });
-
-  redirect("/");
+  return session;
 }
 
-export async function verifySession(
+export async function validateSessionToken(
   token: string,
 ): Promise<SessionValidationResult> {
   const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
-
   const data = await db
     .select({ user: users, session: sessions })
     .from(sessions)
@@ -66,8 +56,7 @@ export async function verifySession(
     return { session: null, user: null };
   }
 
-  const session: Session = data[0].session;
-  const user: User = data[0].user;
+  const { user, session } = data[0];
 
   if (Date.now() >= session.expiresAt.getTime()) {
     await db.delete(sessions).where(eq(sessions.id, session.id));
@@ -88,7 +77,23 @@ export async function verifySession(
 
 export async function deleteSession(sessionId: string): Promise<void> {
   await db.delete(sessions).where(eq(sessions.id, sessionId));
+}
 
+export async function setSessionTokenCookie(
+  token: string,
+  expiresAt: Date,
+): Promise<void> {
+  const cookieStore = await cookies();
+  cookieStore.set("session", token, {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    expires: expiresAt,
+    path: "/",
+  });
+}
+
+export async function deleteSessionTokenCookie(): Promise<void> {
   const cookieStore = await cookies();
   cookieStore.delete("session");
 }
@@ -102,8 +107,7 @@ export const getCurrentSession = cache(
       return { session: null, user: null };
     }
 
-    const { session, user }: SessionValidationResult =
-      await verifySession(token);
-    return { session, user } as SessionValidationResult;
+    const result = await validateSessionToken(token);
+    return result;
   },
 );

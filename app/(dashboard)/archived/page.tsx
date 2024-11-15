@@ -4,11 +4,15 @@ import NoteList from "@/components/notes/NoteList";
 import { type Note } from "@/app/_lib/db/schema";
 import { Button } from "@/components/ui/Button";
 import { Delete, Restore } from "@/components/ui/Icons";
+import { getCurrentSession } from "@/app/_lib/server/session";
+import { redirect } from "next/navigation";
 
-// import { getArchivedNotes } from "@/lib/actions/notes";
+export default async function ArchivedNotes() {
+  const { session, user } = await getCurrentSession();
 
-export default function ArchivedNotes() {
-  // const notes = await getArchivedNotes();
+  if (session === null || user === null) {
+    return redirect("/login");
+  }
 
   const notes: Note[] = [];
 

@@ -17,9 +17,9 @@ export default async function NotesPage() {
   // const notes = await getNotes();
   const notes: Note[] = [];
 
-  const { session } = await getCurrentSession();
+  const { session, user } = await getCurrentSession();
 
-  if (session === null) {
+  if (session === null || user === null) {
     redirect("/login");
   }
 

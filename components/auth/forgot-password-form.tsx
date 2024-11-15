@@ -8,15 +8,8 @@ import { Label } from "@/components/ui/Label";
 import { Info } from "../ui/Icons";
 import { forgotPassword } from "@/app/(auth)/actions";
 
-const initialForgotPasswordState = {
-  errors: {},
-};
-
 export function ForgotPasswordForm() {
-  const [state, action] = useActionState(
-    forgotPassword,
-    initialForgotPasswordState,
-  );
+  const [state, action, pending] = useActionState(forgotPassword, undefined);
 
   return (
     <form action={action} className="flex flex-col gap-4 pt-6 text-left">
@@ -31,7 +24,7 @@ export function ForgotPasswordForm() {
           required
         />
       </div>
-      {state.errors?.email && (
+      {state?.errors?.email && (
         <span className="flex text-red-500">
           <Info className="-mt-[1px] mr-2 size-4" />
           <p className="text-preset-6">{state.errors.email}</p>
@@ -40,6 +33,7 @@ export function ForgotPasswordForm() {
 
       <Button
         type="submit"
+        disabled={pending}
         className="w-full text-preset-3 font-medium text-white"
       >
         Send Reset Link

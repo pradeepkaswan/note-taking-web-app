@@ -14,70 +14,8 @@ interface ToastProps {
 }
 
 export const toast = {
-  accountDoesNotExist: () => {
-    Toast.success({
-      message: "Account does not exist",
-      link: {
-        text: "Sign up",
-        href: "/signup",
-      },
-    });
-  },
-
-  saveNote: () => {
-    Toast.success({
-      message: "Note saved successfully",
-    });
-  },
-
-  archiveNote: () => {
-    Toast.success({
-      message: "Note archived.",
-      link: {
-        text: "Archived Notes",
-        href: "/notes/archived",
-      },
-    });
-  },
-
-  deleteNote: () => {
-    Toast.success({
-      message: "Note permanently deleted.",
-    });
-  },
-
-  restoreNote: () => {
-    Toast.success({
-      message: "Note restored to active notes.",
-      link: {
-        text: "All Notes",
-        href: "/notes",
-      },
-    });
-  },
-
-  updateSettings: () => {
-    Toast.success({
-      message: "Settings updated successfully!",
-    });
-  },
-
-  changePassword: () => {
-    Toast.success({
-      message: "Password changed successfully!",
-    });
-  },
-
-  addTag: () => {
-    Toast.success({
-      message: "Tag added successfully!",
-    });
-  },
-
-  removeTag: () => {
-    Toast.success({
-      message: "Tag removed successfully!",
-    });
+  success: ({ message, link }: ToastProps) => {
+    Toast.success({ message, link });
   },
 };
 
