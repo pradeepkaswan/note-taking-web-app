@@ -1,5 +1,5 @@
-import { Button } from "./ui/Button";
-import { Delete, Archive } from "./ui/Icons";
+import { Button } from "@/components/ui/Button";
+import { Delete, Archive } from "@/components/ui/Icons";
 
 export default function NoteActions() {
   return (

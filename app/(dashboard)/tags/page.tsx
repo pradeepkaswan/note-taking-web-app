@@ -1,5 +1,5 @@
 import { type Tag } from "@/app/_lib/db/schema";
-import TagList from "@/components/TagList";
+import TagList from "@/components/tags/TagList";
 // import { getTags } from "@/lib/actions/notes";
 
 export default async function TagsPage() {

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { Logo, Settings } from "@/components/ui/Icons";
 
-import Search from "@/components/search";
+import Search from "@/components/layout/search";
 import { getCurrentSession } from "@/app/_lib/server/session";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 

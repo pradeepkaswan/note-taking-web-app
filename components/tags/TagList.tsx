@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Tag } from "./ui/Icons";
+import { Tag } from "@/components/ui/Icons";
 import { type Tag as ITag } from "@/app/_lib/db/schema";
 
 export default function TagList({ tags }: { tags: ITag[] }) {

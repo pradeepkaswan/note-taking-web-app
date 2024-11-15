@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import Search from "@/components/search";
+import Search from "@/components/layout/search";
 import { type Note } from "@/app/_lib/db/schema";
 import NoteList from "@/components/notes/NoteList";
 import { Suspense } from "react";

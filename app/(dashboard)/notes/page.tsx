@@ -3,8 +3,8 @@ import { redirect } from "next/navigation";
 
 import NoteList from "@/components/notes/NoteList";
 import { type Note } from "@/app/_lib/db/schema";
-import CreateNoteButton from "@/components/create-note-button";
-import NoteActions from "@/components/note-actions";
+import CreateNoteButton from "@/components/notes/create-note-button";
+import NoteActions from "@/components/notes/note-actions";
 import { getCurrentSession } from "@/app/_lib/server/session";
 // import { getNotes } from "../actions.ts";
 

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import GoogleOAuthButton from "@/components/google-oauth-button";
+import GoogleOAuthButton from "@/components/auth/google-oauth-button";
 import { LoginForm } from "@/components/auth/login-form";
 import { getCurrentSession } from "@/app/_lib/server/session";
 

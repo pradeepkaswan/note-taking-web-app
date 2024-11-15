@@ -1,6 +1,6 @@
-import BottomNav from "@/components/shared/bottom-nav";
-import SideNav from "@/components/shared/side-nav";
-import Header from "@/components/shared/header";
+import BottomNav from "@/components/layout/bottom-nav";
+import SideNav from "@/components/layout/side-nav";
+import Header from "@/components/layout/header";
 import { Plus } from "@/components/ui/Icons";
 
 export default async function DashboardLayout({

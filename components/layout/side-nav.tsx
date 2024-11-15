@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Logo } from "@/components/ui/Icons";
-import TagList from "@/components/TagList";
+import TagList from "@/components/tags/TagList";
 import NavLinks from "./nav-links";
 import { type Tag } from "@/app/_lib/db/schema";
 

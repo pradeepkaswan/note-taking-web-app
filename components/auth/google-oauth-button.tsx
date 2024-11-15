@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import { Button } from "./ui/Button";
-import { Google } from "./ui/Icons";
+import { Button } from "@/components/ui/Button";
+import { Google } from "@/components/ui/Icons";
 
 export default function GoogleOAuthButton() {
   return (
