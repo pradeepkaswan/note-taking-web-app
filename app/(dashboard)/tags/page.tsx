@@ -1,4 +1,4 @@
-import { Tag } from "@/app/lib/definitions";
+import { Tag } from "@/app/lib/types";
 import TagList from "@/components/TagList";
 // import { getTags } from "@/lib/actions/notes";
 

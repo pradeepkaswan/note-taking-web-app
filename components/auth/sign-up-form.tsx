@@ -6,14 +6,14 @@ import { Button } from "@/components/ui/Button";
 import * as Icons from "@/components/ui/Icons";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
-import { signupAction } from "@/app/(auth)/actions";
+import { signup } from "@/app/(auth)/actions";
 
 const initialState = {
-  error: {},
+  errors: {},
 };
 
 export function SignUpForm() {
-  const [state, action, isPending] = useActionState(signupAction, initialState);
+  const [state, action, pending] = useActionState(signup, initialState);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   return (
@@ -27,13 +27,13 @@ export function SignUpForm() {
             name="email"
             autoComplete="username"
             placeholder="email@example.com"
-            className={`${state.error?.email && "border-red-500"}`}
+            className={`${state?.errors?.email && "border-red-500"}`}
             required
           />
-          {state.error?.email && (
+          {state?.errors?.email && (
             <span className="flex text-red-500">
               <Icons.Info className="-mt-[1px] mr-2 size-4" />
-              <p className="text-preset-6">{state.error.email}</p>
+              <p className="text-preset-6">{state.errors.email}</p>
             </span>
           )}
         </div>
@@ -58,19 +58,19 @@ export function SignUpForm() {
               name="password"
               autoComplete="current-password"
               required
-              className={`${state.error?.password && "border-red-500"}`}
+              className={`${state?.errors?.password && "border-red-500"}`}
             />
           </div>
-          {state.error?.password && (
+          {state?.errors?.password && (
             <span className="flex text-red-500">
               <Icons.Info className="-mt-[1px] mr-2 size-4" />
-              <p className="text-preset-6">{state.error.password}</p>
+              <p className="text-preset-6">{state.errors.password}</p>
             </span>
           )}
         </div>
 
-        <Button type="submit" disabled={isPending} className="w-full">
-          {isPending ? (
+        <Button type="submit" disabled={pending} className="w-full">
+          {pending ? (
             <Icons.Status className="size-4 text-neutral-300" />
           ) : (
             <span>Sign up</span>

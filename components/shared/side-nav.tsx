@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Logo } from "@/components/ui/Icons";
 import TagList from "@/components/TagList";
 import NavLinks from "./nav-links";
-import { Tag } from "@/app/lib/definitions";
+import { Tag } from "@/app/lib/types";
 
 export default function SideNav() {
   const tags: Tag[] = [];

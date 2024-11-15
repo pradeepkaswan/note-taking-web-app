@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import NoteList from "@/components/notes/NoteList";
-import { Note } from "@/app/lib/definitions";
+import { Note } from "@/app/lib/types";
 import CreateNoteButton from "@/components/create-note-button";
 import NoteActions from "@/components/note-actions";
 import { getCurrentSession } from "@/app/lib/server/session";

@@ -6,15 +6,15 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 import { Info } from "../ui/Icons";
-import { forgotPasswordAction } from "@/app/(auth)/actions";
+import { forgotPassword } from "@/app/(auth)/actions";
 
 const initialForgotPasswordState = {
-  error: {},
+  errors: {},
 };
 
 export function ForgotPasswordForm() {
   const [state, action] = useActionState(
-    forgotPasswordAction,
+    forgotPassword,
     initialForgotPasswordState,
   );
 
@@ -31,10 +31,10 @@ export function ForgotPasswordForm() {
           required
         />
       </div>
-      {state.error?.email && (
+      {state.errors?.email && (
         <span className="flex text-red-500">
           <Info className="-mt-[1px] mr-2 size-4" />
-          <p className="text-preset-6">{state.error.email}</p>
+          <p className="text-preset-6">{state.errors.email}</p>
         </span>
       )}
 

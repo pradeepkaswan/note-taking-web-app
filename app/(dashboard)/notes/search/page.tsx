@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import Search from "@/components/search";
-import { Note } from "@/app/lib/definitions";
+import { Note } from "@/app/lib/types";
 import NoteList from "@/components/notes/NoteList";
 import { Suspense } from "react";
 

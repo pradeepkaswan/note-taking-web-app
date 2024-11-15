@@ -5,7 +5,7 @@ export function verifyEmailInput(email: string): boolean {
 }
 
 export async function checkEmailAvailability(email: string): Promise<boolean> {
-  const existingUser = await db.query.usersTable.findFirst({
+  const existingUser = await db.query.users.findFirst({
     where: (users, { eq }) => eq(users.email, email),
   });
 

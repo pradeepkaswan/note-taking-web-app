@@ -2,13 +2,9 @@ import { cookies } from "next/headers";
 import { decodeIdToken, type OAuth2Tokens } from "arctic";
 import { ObjectParser } from "@pilcrowjs/object-parser";
 
-import {
-  generateSessionToken,
-  createSession,
-  setSessionTokenCookie,
-} from "@/app/lib/server/session";
-import { google } from "@/app/lib/oauth";
-import { createUser, getUserFromGoogleId } from "@/app/lib/server/user";
+import { generateSessionToken, createSession } from "@/app/lib/server/session";
+import { google } from "@/app/lib/server/oauth";
+import { createUser } from "@/app/lib/server/user";
 
 export async function GET(request: Request): Promise<Response> {
   const url = new URL(request.url);
@@ -46,24 +42,11 @@ export async function GET(request: Request): Promise<Response> {
   const picture = claimsParser.getString("picture");
   const email = claimsParser.getString("email");
 
-  const existingUser = await getUserFromGoogleId(googleId);
+  const user = await createUser(email, undefined, googleId, picture, name);
 
-  if (existingUser !== null) {
-    const sessionToken = generateSessionToken();
-    const session = await createSession(sessionToken, existingUser.id);
-    await setSessionTokenCookie(sessionToken, session.expiresAt);
-    return new Response(null, {
-      status: 302,
-      headers: {
-        Location: "/",
-      },
-    });
-  }
-
-  const user = await createUser(googleId, email, name, picture);
   const sessionToken = generateSessionToken();
-  const session = await createSession(sessionToken, user.id);
-  await setSessionTokenCookie(sessionToken, session.expiresAt);
+  await createSession(sessionToken, user.id);
+
   return new Response(null, {
     status: 302,
     headers: {

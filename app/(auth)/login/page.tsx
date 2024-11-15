@@ -36,7 +36,7 @@ export default async function LoginPage() {
       <p className="text-center text-preset-5 text-neutral-600 dark:text-neutral-300">
         No account yet?{" "}
         <Link
-          className="text-neutral-950 hover:text-blue-500 dark:text-white"
+          className="text-neutral-950 hover:text-blue-500 dark:text-white dark:hover:text-blue-500"
           href="/signup"
         >
           Sign Up

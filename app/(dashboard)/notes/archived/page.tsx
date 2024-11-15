@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import NoteList from "@/components/notes/NoteList";
-import { Note } from "@/app/lib/definitions";
+import { Note } from "@/app/lib/types";
 import { Button } from "@/components/ui/Button";
 import { Delete, Restore } from "@/components/ui/Icons";
 
