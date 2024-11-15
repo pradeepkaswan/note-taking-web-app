@@ -102,7 +102,8 @@ export const getCurrentSession = cache(
       return { session: null, user: null };
     }
 
-    const result = await verifySession(token);
-    return result;
+    const { session, user }: SessionValidationResult =
+      await verifySession(token);
+    return { session, user } as SessionValidationResult;
   },
 );

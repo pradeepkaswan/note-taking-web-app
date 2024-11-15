@@ -25,7 +25,7 @@ export default async function NotesPage() {
 
   return (
     <div className="flex h-full justify-between rounded-lg bg-white dark:divide-neutral-800 dark:bg-neutral-950 xl:rounded-none">
-      <div className="w-full border-r border-neutral-200 px-4 py-5 md:px-8 md:py-6 xl:w-[290px] xl:pl-8 xl:pr-4 xl:pt-5">
+      <div className="w-full border-r border-neutral-200 px-4 py-5 dark:border-neutral-800 md:px-8 md:py-6 xl:w-[290px] xl:pl-8 xl:pr-4 xl:pt-5">
         <h1 className="mb-4 text-preset-1 text-neutral-950 dark:text-white xl:hidden">
           All Notes
         </h1>
