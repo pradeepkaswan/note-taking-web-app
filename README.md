@@ -38,7 +38,7 @@ Users should be able to:
 
 ### Screenshot
 
-![Design preview for the Note-taking web app coding challenge](./preview.jpg)
+![Design preview for the Note-taking web app coding challenge](./preview.png)
 
 ### Links
 
