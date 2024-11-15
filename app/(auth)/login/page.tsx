@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 import GoogleOAuthButton from "@/components/google-oauth-button";
 import { LoginForm } from "@/components/auth/login-form";
-import { getCurrentSession } from "@/app/lib/server/session";
+import { getCurrentSession } from "@/app/_lib/server/session";
 
 export default async function LoginPage() {
   const { session, user } = await getCurrentSession();

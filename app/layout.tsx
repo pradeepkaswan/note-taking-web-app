@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { inter, noto_serif, source_code_pro } from "@/components/ui/fonts";
-import { ToastProvider } from "@/providers/ToastProvider";
+import { ToastProvider } from "@/providers/toast-provider";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 

@@ -2,9 +2,9 @@ import { cookies } from "next/headers";
 import { decodeIdToken, type OAuth2Tokens } from "arctic";
 import { ObjectParser } from "@pilcrowjs/object-parser";
 
-import { generateSessionToken, createSession } from "@/app/lib/server/session";
-import { google } from "@/app/lib/server/oauth";
-import { createUser } from "@/app/lib/server/user";
+import { generateSessionToken, createSession } from "@/app/_lib/server/session";
+import { google } from "@/app/_lib/server/oauth";
+import { createUser } from "@/app/_lib/server/user";
 
 export async function GET(request: Request): Promise<Response> {
   const url = new URL(request.url);

@@ -91,11 +91,11 @@ export async function getUserByEmailOrGoogleId(
   if (email) where.push(eq(users.email, email));
   if (googleId) where.push(eq(users.googleId, googleId));
 
-  const data = await db.query.users.findFirst({
+  const data = await db.query.users.findMany({
     where: or(...where),
   });
 
-  return data ? data : null;
-}
+  const user = data[0];
 
-// this is my current createUser function: export async function createUser(   email: string,   password?: string,   googleId?: string,   picture?: string,   name?: string, ): Promise> {   // check if user already exists by email   const existingUser = await getUserByEmailOrGoogleId(email);    if (existingUser) {     // User already exists, update thier record     if (!existingUser.googleId) {       const updatedUser = await db         .update(users)         .set({           googleId,           name: name || existingUser.name,           picture: picture || existingUser.picture,         })         .where(eq(users.id, existingUser.id))         .returning({ id: users.id })         .then((res) => res[0]);        return updatedUser;     }      return existingUser;   }   // User does not exist yet, create a new record   const hashedPassword = await hashPassword(password);    const data = await db     .insert(users)     .values({       name,       email,       hashedPassword,       googleId,       picture,     })     .returning({ id: users.id })     .then((res) => res[0]);    return data; } change the above code according to this code:
+  return user;
+}

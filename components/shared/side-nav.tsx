@@ -3,10 +3,23 @@ import Link from "next/link";
 import { Logo } from "@/components/ui/Icons";
 import TagList from "@/components/TagList";
 import NavLinks from "./nav-links";
-import { Tag } from "@/app/lib/types";
+import { type Tag } from "@/app/_lib/db/schema";
 
 export default function SideNav() {
-  const tags: Tag[] = [];
+  const tags: Tag[] = [
+    {
+      id: "1",
+      name: "Design",
+    },
+    {
+      id: "2",
+      name: "Development",
+    },
+    {
+      id: "3",
+      name: "Marketing",
+    },
+  ];
 
   return (
     <aside className="hidden h-screen w-[272px] flex-col border-r bg-white px-4 py-3 dark:border-neutral-800 dark:bg-neutral-950 xl:flex">
@@ -22,7 +35,7 @@ export default function SideNav() {
       {tags && tags.length > 0 && (
         <>
           <div className="px-2">
-            <h2 className="text-preset-4 text-neutral-500">Tags</h2>
+            <h2 className="pb-2 text-preset-4 text-neutral-500">Tags</h2>
           </div>
           <TagList tags={tags} />
         </>

@@ -1,5 +1,12 @@
 import { InferSelectModel, relations } from "drizzle-orm";
-import { pgTable, varchar, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  varchar,
+  text,
+  timestamp,
+  uuid,
+  boolean,
+} from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -37,11 +44,29 @@ export const passwordResetSessions = pgTable("password_reset_sessions", {
   }).notNull(),
 });
 
+export const notes = pgTable("notes", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  title: text("title").notNull(),
+  content: text("content").notNull(),
+  tags: varchar({ length: 255 }).references(() => tags.name),
+  isArchived: boolean("is_archived").default(false).notNull(),
+
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const tags = pgTable("tags", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  name: varchar({ length: 255 }).notNull(),
+});
+
 export type User = InferSelectModel<typeof users>;
 export type Session = InferSelectModel<typeof sessions>;
 export type PasswordResetSession = InferSelectModel<
   typeof passwordResetSessions
 >;
+export type Note = InferSelectModel<typeof notes>;
+export type Tag = InferSelectModel<typeof tags>;
 
 export const userRelations = relations(users, ({ many }) => ({
   sessions: many(sessions),

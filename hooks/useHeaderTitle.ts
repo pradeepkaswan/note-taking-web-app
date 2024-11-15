@@ -1,4 +1,4 @@
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const ROUTES = {
   HOME: "/notes",
@@ -28,9 +28,6 @@ const headerConfigs = [
 
 export function useHeaderTitle() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const segments = decodeURIComponent(pathname).split("/").filter(Boolean);
-  const searchQuery = searchParams?.get("q") || "";
 
   const config = headerConfigs.find((config) => {
     if (typeof config.pattern === "string") {

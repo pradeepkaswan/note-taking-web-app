@@ -15,7 +15,7 @@ const links = [
   {
     icon: Archive,
     name: "Archived Notes",
-    href: "/notes/archived",
+    href: "/archived",
   },
 ];
 

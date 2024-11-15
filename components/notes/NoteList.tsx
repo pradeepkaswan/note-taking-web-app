@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import NoteCard from "./NoteCard";
-import { Note, Tag } from "@/app/lib/types";
+import type { Note, Tag } from "@/app/_lib/db/schema";
 
 type Props = {
   notes: Note[];

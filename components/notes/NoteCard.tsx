@@ -1,4 +1,4 @@
-import { Note, Tag } from "@/app/lib/types";
+import type { Note, Tag } from "@/app/_lib/db/schema";
 
 type Props = {
   note: Note;

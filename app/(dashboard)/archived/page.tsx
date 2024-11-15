@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import NoteList from "@/components/notes/NoteList";
-import { Note } from "@/app/lib/types";
+import { type Note } from "@/app/_lib/db/schema";
 import { Button } from "@/components/ui/Button";
 import { Delete, Restore } from "@/components/ui/Icons";
 
@@ -15,7 +15,7 @@ export default function ArchivedNotes() {
   return (
     <div className="flex h-full justify-between divide-x divide-neutral-200 rounded-lg bg-white dark:divide-neutral-800 dark:bg-neutral-950 xl:rounded-none">
       <div className="w-full px-4 py-5 dark:bg-neutral-950 md:px-8 md:py-6 xl:w-[290px] xl:pl-8 xl:pr-4 xl:pt-5">
-        <h1 className="mb-4 text-preset-1 text-neutral-950 xl:hidden">
+        <h1 className="mb-4 text-preset-1 text-neutral-950 dark:text-white xl:hidden">
           Archived Notes
         </h1>
 

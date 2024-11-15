@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import Search from "@/components/search";
-import { Note } from "@/app/lib/types";
+import { type Note } from "@/app/_lib/db/schema";
 import NoteList from "@/components/notes/NoteList";
 import { Suspense } from "react";
 
@@ -10,7 +10,9 @@ export default function SearchPage() {
 
   return (
     <div className="flex h-full flex-col gap-4 rounded-lg bg-white px-4 py-5 dark:bg-neutral-950 md:px-8 md:py-6">
-      <h1 className="text-preset-1 text-neutral-950 xl:hidden">Search</h1>
+      <h1 className="text-preset-1 text-neutral-950 dark:text-white xl:hidden">
+        Search
+      </h1>
       <div className="xl:hidden">
         <Suspense fallback={<div>Loading...</div>}>
           <Search placeholder="Search by title, content, or tags..." />

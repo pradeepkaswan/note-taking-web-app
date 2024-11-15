@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 import NoteList from "@/components/notes/NoteList";
-import { Note } from "@/app/lib/types";
+import { type Note } from "@/app/_lib/db/schema";
 import CreateNoteButton from "@/components/create-note-button";
 import NoteActions from "@/components/note-actions";
-import { getCurrentSession } from "@/app/lib/server/session";
-import { redirect } from "next/navigation";
-// import { getNotes } from "@/app/lib/actions/notes";
+import { getCurrentSession } from "@/app/_lib/server/session";
+// import { getNotes } from "../actions.ts";
 
 export const metadata: Metadata = {
   title: "All Notes",

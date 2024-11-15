@@ -7,17 +7,17 @@ import {
   generateSessionToken,
   getCurrentSession,
   deleteSession,
-} from "@/app/lib/server/session";
+} from "@/app/_lib/server/session";
 import {
   checkEmailAvailability,
   verifyEmailInput,
-} from "@/app/lib/server/email";
+} from "@/app/_lib/server/email";
 import {
   verifyPasswordhash,
   verifyPasswordStrength,
-} from "@/app/lib/server/password";
-import { createUser, getUserByEmailOrGoogleId } from "@/app/lib/server/user";
-import { db } from "../lib/db";
+} from "@/app/_lib/server/password";
+import { createUser, getUserByEmailOrGoogleId } from "@/app/_lib/server/user";
+import { db } from "../_lib/db";
 
 interface ActionResult {
   errors?: {

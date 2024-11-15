@@ -13,10 +13,13 @@ export function LogoutButton() {
   const [, action] = useActionState(logout, initialState);
 
   return (
-    <form action={action}>
-      <button type="submit" className="flex items-center gap-2 p-2">
+    <form action={action} className="pt-2">
+      <button
+        type="submit"
+        className="flex items-center gap-2 p-2 text-neutral-700 dark:text-neutral-200"
+      >
         <Logout className="size-5 shrink-0" />
-        <span className="text-preset-4 text-neutral-700">Logout</span>
+        <span className="text-preset-4 dark:text-neutral-200">Logout</span>
       </button>
     </form>
   );
